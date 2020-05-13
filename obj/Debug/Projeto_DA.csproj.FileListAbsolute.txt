@@ -1,0 +1,16 @@
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\bin\Debug\Projeto_DA.exe.config
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\bin\Debug\Projeto_DA.exe
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\bin\Debug\Projeto_DA.pdb
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\bin\Debug\EntityFramework.dll
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\bin\Debug\EntityFramework.SqlServer.dll
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\bin\Debug\EntityFramework.xml
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\bin\Debug\EntityFramework.SqlServer.xml
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\obj\Debug\Projeto_DA.csprojAssemblyReference.cache
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\obj\Debug\Projeto_DA.Form1.resources
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\obj\Debug\Projeto_DA.Properties.Resources.resources
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\obj\Debug\Projeto_DA.csproj.GenerateResource.cache
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\obj\Debug\Projeto_DA.csproj.CoreCompileInputs.cache
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\obj\Debug\Projeto_DA.csproj.CopyComplete
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\obj\Debug\Projeto_DA.exe
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\obj\Debug\Projeto_DA.pdb
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\obj\Debug\Projeto_DA.Form2.resources
