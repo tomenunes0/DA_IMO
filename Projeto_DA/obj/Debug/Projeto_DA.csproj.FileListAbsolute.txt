@@ -1,0 +1,50 @@
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Projeto_DA.csprojAssemblyReference.cache
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Home.GerirClientes.resources
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Home.Home.resources
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Projeto_DA.Properties.Resources.resources
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Projeto_DA.csproj.GenerateResource.cache
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Projeto_DA.csproj.CoreCompileInputs.cache
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\bin\Debug\Projeto_DA.exe.config
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\bin\Debug\Projeto_DA.exe
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\bin\Debug\Projeto_DA.pdb
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\bin\Debug\EntityFramework.dll
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\bin\Debug\EntityFramework.xml
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Projeto_DA.csproj.CopyComplete
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Projeto_DA.exe
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Projeto_DA.pdb
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\obj\Debug\Projeto_DA.csprojAssemblyReference.cache
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\obj\Debug\Home.GerirClientes.resources
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\obj\Debug\Home.Home.resources
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\obj\Debug\Projeto_DA.Properties.Resources.resources
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\obj\Debug\Projeto_DA.csproj.GenerateResource.cache
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\obj\Debug\Projeto_DA.csproj.CoreCompileInputs.cache
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\obj\Debug\Projeto_DA.exe
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\obj\Debug\Projeto_DA.pdb
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\bin\Debug\Projeto_DA.exe.config
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\bin\Debug\Projeto_DA.exe
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\bin\Debug\Projeto_DA.pdb
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\bin\Debug\EntityFramework.dll
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\bin\Debug\EntityFramework.xml
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\obj\Debug\Projeto_DA.csproj.CopyComplete
+C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\obj\Debug\Home.GerirCasas.resources
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\bin\Debug\Projeto_DA.exe.config
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\bin\Debug\Projeto_DA.exe
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\bin\Debug\Projeto_DA.pdb
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\bin\Debug\EntityFramework.dll
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\bin\Debug\EntityFramework.xml
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\obj\Debug\Projeto_DA.csprojAssemblyReference.cache
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\obj\Debug\Home.GerirCasas.resources
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\obj\Debug\Home.GerirClientes.resources
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\obj\Debug\Home.Home.resources
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\obj\Debug\Projeto_DA.Properties.Resources.resources
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\obj\Debug\Projeto_DA.csproj.GenerateResource.cache
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\obj\Debug\Projeto_DA.csproj.CoreCompileInputs.cache
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\obj\Debug\Projeto_DA.csproj.CopyComplete
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\obj\Debug\Projeto_DA.exe
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\obj\Debug\Projeto_DA.pdb

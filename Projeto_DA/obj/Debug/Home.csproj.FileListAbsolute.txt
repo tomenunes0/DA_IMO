@@ -1,0 +1,16 @@
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\bin\Debug\Home.exe.config
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\bin\Debug\Home.exe
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\bin\Debug\Home.pdb
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\bin\Debug\EntityFramework.dll
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\bin\Debug\EntityFramework.xml
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Home.csprojAssemblyReference.cache
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Home.Home.resources
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Home.Properties.Resources.resources
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Home.csproj.GenerateResource.cache
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Home.csproj.CoreCompileInputs.cache
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Home.csproj.CopyComplete
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Home.exe
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Home.pdb
+C:\Users\AlexScorpion100\source\repos\Projeto_DA\Home\obj\Debug\Home.GerirClientes.resources
