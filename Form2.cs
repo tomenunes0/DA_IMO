@@ -29,13 +29,6 @@ namespace Projeto_DA
             clienteBindingSource.DataSource = imobiliaria.Clientes.Local.ToBindingList();
         }
 
-        //Quando o botao de save for precionado esta funcao sera ativada
-        private void clienteBindingNavigatorSaveItem_Click(object sender, EventArgs e)
-        {
-            //Processo de guardados na base de dados 
-            imobiliaria.SaveChanges();
-        }
-
         //Butao de filtro quando sera percionado 
         private void btnFilter_Click(object sender, EventArgs e)
         {
@@ -43,7 +36,7 @@ namespace Projeto_DA
             if (txtNome_Filter.Text.Length > 0)
             {
                 //desativa o botao de adicionar novo item para a base de dados
-                bindingNavigatorAddNewItem.Enabled = false;
+                btnGuardar.Enabled = false;
                 //para dar dispose da imobiliaria
                 imobiliaria.Dispose();
                 //renovar o container
@@ -60,7 +53,7 @@ namespace Projeto_DA
             else
             {
                 //o botao de adicionar novo item estara ent ativo
-                bindingNavigatorAddNewItem.Enabled = true;
+                btnGuardar.Enabled = true;
                 //para dar dispose da imobiliaria
                 imobiliaria.Dispose();
                 //renovar o container
@@ -80,7 +73,7 @@ namespace Projeto_DA
             if (txtNome_Filter.Text.Length > 0)
             {
                 //desativa o botao de adicionar novo item para a base de dados
-                bindingNavigatorAddNewItem.Enabled = false;
+                btnGuardar.Enabled = false;
                 //para dar dispose da imobiliaria
                 imobiliaria.Dispose();
                 //renovar o container
@@ -97,7 +90,7 @@ namespace Projeto_DA
             else
             {
                 //o botao de adicionar novo item estara ent ativo
-                bindingNavigatorAddNewItem.Enabled = true;
+                btnGuardar.Enabled = true;
                 //para dar dispose da imobiliaria
                 imobiliaria.Dispose();
                 //renovar o container
@@ -119,6 +112,18 @@ namespace Projeto_DA
             frm.Show();
             //Fechar o form 
             this.Hide();
+        }
+
+        //Quando o botao de save for precionado esta funcao sera ativada
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            //Processo de guardados na base de dados 
+            imobiliaria.SaveChanges();
+        }
+
+        private void clienteDataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("Penis");   
         }
     }
 }
