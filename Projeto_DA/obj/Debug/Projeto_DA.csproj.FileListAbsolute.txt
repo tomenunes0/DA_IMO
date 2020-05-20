@@ -65,3 +65,4 @@ D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Pr
 D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Projeto_DA.csproj.CopyComplete
 D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Projeto_DA.exe
 D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Projeto_DA.pdb
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Projeto_DA.GerirLimpezas.resources

@@ -36,6 +36,8 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnGerirLimpezas = new System.Windows.Forms.Button();
             this.gbDadosVenda = new System.Windows.Forms.GroupBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.btnVerVenda = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -84,8 +86,6 @@
             this.ruaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.casaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.clienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.gbDadosVenda.SuspendLayout();
             this.gbDadosArrendamento.SuspendLayout();
@@ -156,6 +156,7 @@
             this.btnClear.TabIndex = 48;
             this.btnClear.Text = "❌";
             this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnNovo
             // 
@@ -191,6 +192,7 @@
             this.btnGuardar.TabIndex = 49;
             this.btnGuardar.Text = "Guardar 💾";
             this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnGerirLimpezas
             // 
@@ -208,6 +210,7 @@
             this.btnGerirLimpezas.TabIndex = 47;
             this.btnGerirLimpezas.Text = "GerirLimpezas";
             this.btnGerirLimpezas.UseVisualStyleBackColor = false;
+            this.btnGerirLimpezas.Click += new System.EventHandler(this.btnGerirLimpezas_Click);
             // 
             // gbDadosVenda
             // 
@@ -224,6 +227,24 @@
             this.gbDadosVenda.TabIndex = 45;
             this.gbDadosVenda.TabStop = false;
             this.gbDadosVenda.Text = "Dados de Arrendamento";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(255, 126);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(24, 24);
+            this.label19.TabIndex = 59;
+            this.label19.Text = "€";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(255, 66);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(24, 24);
+            this.label18.TabIndex = 54;
+            this.label18.Text = "€";
             // 
             // btnVerVenda
             // 
@@ -326,6 +347,7 @@
             this.btnVerCriarArrendamento.TabIndex = 53;
             this.btnVerCriarArrendamento.Text = "Ver/Criar";
             this.btnVerCriarArrendamento.UseVisualStyleBackColor = false;
+            this.btnVerCriarArrendamento.Click += new System.EventHandler(this.btnVerCriarArrendamento_Click);
             // 
             // label14
             // 
@@ -592,6 +614,7 @@
             this.btnRemover.TabIndex = 18;
             this.btnRemover.Text = "Remover ❌";
             this.btnRemover.UseVisualStyleBackColor = false;
+            this.btnRemover.Click += new System.EventHandler(this.btnRemover_Click);
             // 
             // casaDataGridView
             // 
@@ -675,24 +698,6 @@
             // clienteBindingSource
             // 
             this.clienteBindingSource.DataSource = typeof(Projeto_DA.Cliente);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(255, 66);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(24, 24);
-            this.label18.TabIndex = 54;
-            this.label18.Text = "€";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(255, 126);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(24, 24);
-            this.label19.TabIndex = 59;
-            this.label19.Text = "€";
             // 
             // GerirCasas
             // 

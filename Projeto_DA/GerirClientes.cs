@@ -184,9 +184,9 @@ namespace Home
             //Marca a imobiliaria como novo container da base de dados 
             imobiliaria = new masterEntities();
             //Seleciona o conteudo da base de dados e organiza - o por nome 
-           (from cliente in imobiliaria.Clientes orderby cliente.Nome select cliente).Load();
+            (from cliente in imobiliaria.Clientes orderby cliente.Nome select cliente).Load();
             //Carrega a informaçao que foi pedida na linha anterior para a listbox que foi gerada
-           clienteBindingSource.DataSource = imobiliaria.Clientes.Local.ToBindingList();
+            clienteBindingSource.DataSource = imobiliaria.Clientes.Local.ToBindingList();
         }
 
         //Quando o butao de remover for precionado
@@ -197,10 +197,17 @@ namespace Home
             //Verifica qual foi a opecao escolhida e se for a opcao nao este ira entrar no if 
             if (result == DialogResult.Yes)
             {
-                //Chamar a funcao para eliminar os clientes
-                eliminiar_Clientes();
-                //Chamar a funcao para atualizar a lista dos clientes
-                atualizarListaClientes();
+                //Verificar se o cliente tem ou nao casas associadas
+                if (clienteSelecionado.Casas.ToList<Casa>() == null)
+                {
+                    //Chamar a funcao para eliminar os clientes
+                    eliminiar_Clientes();
+                    //Chamar a funcao para atualizar a lista dos clientes
+                    atualizarListaClientes();
+                }
+                else
+                    MessageBox.Show("O cliente tem casas nao pode eliminar o cliente! Sem eleminar as casas primeiro!", "Eliminar Clientes?", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             }
         }
 
@@ -309,6 +316,6 @@ namespace Home
                 e.Handled = true;
             }
         }
-      
+
     }
 }

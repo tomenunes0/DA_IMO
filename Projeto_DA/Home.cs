@@ -45,7 +45,7 @@ namespace Home
             //Atualiza o dia da label
             lblDay.Text = DateTime.Now.ToString("dd");
             //Atualiza o mes da label
-            lblMouth.Text = DateTime.Now.ToString("y");
+            lblMouth.Text = DateTime.Now.ToString("yyy");
             //Atualiza os segundos da label 
             lblSeconds.Text = DateTime.Now.ToString("sss");
             //Atualiza os minutes da label 

@@ -20,7 +20,9 @@ namespace Home
         //Perparar a class cliente para guardar o cliente selecionado
         private Cliente clienteSelecionado;
         //Perparar a class casa para guardar o casa selecionado
-        private Casa casaSelecionada;
+        public static Casa casaSelecionada;
+        //Variavel se eh vendavel ou nao
+        public static string arrenvendavel;
 
         public GerirCasas()
         {
@@ -44,9 +46,11 @@ namespace Home
         private void GerirCasas_FormClosed(object sender, FormClosedEventArgs e)
         {
             //Perparar para abrir o form 1 
-            Home frm = new Home();
+            //GerirLimpezas gerirLimpezas = new GerirLimpezas();
+            Home home = new Home();
             //Mostar o form 1
-            frm.Show();
+            home.Show();
+            //gerirLimpezas.Hide();
             //Fechar o form 
             this.Hide();
         }
@@ -57,7 +61,8 @@ namespace Home
             if (chkArrendavel.Checked == true)
             {
                 gbDadosVenda.Enabled = false;
-                chkVendavel.Checked = false;
+                // chkVendavel.Checked = false;
+                arrenvendavel = chkArrendavel.Text;
             }
             else 
                 gbDadosVenda.Enabled = true;
@@ -65,7 +70,8 @@ namespace Home
             if (chkVendavel.Checked == true)
             {
                 gbDadosArrendamento.Enabled = false;
-                chkArrendavel.Checked = false;
+                //chkArrendavel.Checked = false;
+                arrenvendavel = chkVendavel.Text;
             }
             else
                 gbDadosArrendamento.Enabled = true;
@@ -169,12 +175,65 @@ namespace Home
             if (casaSelecionada != null)
             {
                 //Carregar as imformaçoes para os respetivos citios
+                lblIdCasa.Text = "ID: " + casaSelecionada.IdCasa;
                 txtRua.Text = casaSelecionada.Andar;
                 txtLocalidade.Text = casaSelecionada.Localidade;
                 txtNumero.Text = casaSelecionada.Numero;
                 txtAndar.Text = casaSelecionada.Andar;
-            }
-            
+                nudArea.Value = casaSelecionada.Area;
+                nudAssoalhadas.Value = casaSelecionada.NumeroAssoalhada;
+                nudWC.Value = casaSelecionada.NumeroWC;
+                nudPisos.Value = casaSelecionada.NumerosPisos;
+                cbTipoDeMoradia.Text = casaSelecionada.Tipo;
+                //cb_Clientes.Text = imobiliaria.Client casaSelecionada.IdCasa.ToString();
+            }  
+        }
+
+        //Funcao para limpar
+        private void limpar_Campos()
+        {
+            //Limpar textbox
+            txtRua.Text = string.Empty;
+            txtLocalidade.Text = string.Empty;
+            txtNumero.Text = string.Empty;
+            txtAndar.Text = string.Empty;
+            nudArea.Value = 0;
+            nudAssoalhadas.Value = 0;
+            nudWC.Value = 0;
+            nudPisos.Value = 0;
+            cbTipoDeMoradia.Text = string.Empty;
+        }
+
+        //Quando o butao limpar for precionado
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            limpar_Campos();
+        }
+
+        //butao de criar 
+        private void btnVerCriarArrendamento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //butao gerir cliente
+        private void btnGerirLimpezas_Click(object sender, EventArgs e)
+        {
+            //Perparar para abrir o form 1 
+            GerirLimpezas frm = new GerirLimpezas(casaSelecionada, arrenvendavel, imobiliaria);
+            //Mostar o form 1
+            frm.Show();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            //Guarda a imformaçao para a text box
+            imobiliaria.SaveChanges();
+        }
+
+        private void btnRemover_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
