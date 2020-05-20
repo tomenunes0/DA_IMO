@@ -26,6 +26,7 @@ namespace Home
         {
             //Inicia os componentes do form2 
             InitializeComponent();
+            //Atualizar a lista dos clientes sem nenhuma excecao
             atualizarListaClientes();
             //Meter o cliente selecionado a null
             clienteSelecionado = null;
@@ -91,7 +92,7 @@ namespace Home
                 btnRemover.Enabled = true;
                 novo = false;
             }
-
+            //Chamar a funcao para atualizar as lista das casas
             atualiza_Casas();
 
         }
@@ -116,6 +117,7 @@ namespace Home
             clienteSelecionado = null;
             //Descelecionar listas de gird view 
             clienteDataGridView.ClearSelection();
+            lb_Casas.DataSource = null;
             //Limpar caixas de texto
             txtNome.Text = string.Empty;
             txtNif.Text = string.Empty;
@@ -125,9 +127,8 @@ namespace Home
             btnNovo.Enabled = true;
             //Desativar butoes
             btnRemover.Enabled = false;
-
+            //Meter o novo igual a a true
             novo = true;
-
         }
 
         //Filtrar a data grid view pelo nome que foi metido na text box
@@ -295,7 +296,7 @@ namespace Home
             if (clienteSelecionado != null)
             {
                 lb_Casas.DataSource = null;
-                lb_Casas.DataSource = clienteSelecionado.Casas.ToList();
+                lb_Casas.DataSource = clienteSelecionado.Casas.ToList<Casa>();
             }
         }
 

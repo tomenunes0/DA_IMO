@@ -14,10 +14,6 @@
     <EntitySet Name="Casas" EntityType="masterModel.Casa" />
     <EntitySet Name="Servicos" EntityType="masterModel.Servico" />
     <EntitySet Name="Limpezas" EntityType="masterModel.Limpeza" />
-    <AssociationSet Name="ServicoLimpeza" Association="masterModel.ServicoLimpeza">
-      <End Role="Servico" EntitySet="Servicos" />
-      <End Role="Limpeza" EntitySet="Limpezas" />
-    </AssociationSet>
     <AssociationSet Name="LimpezaCasa" Association="masterModel.LimpezaCasa">
       <End Role="Limpeza" EntitySet="Limpezas" />
       <End Role="Casa" EntitySet="Casas" />
@@ -31,9 +27,13 @@
       <End Role="Cliente" EntitySet="Clientes" />
       <End Role="Venda" EntitySet="Vendas" />
     </AssociationSet>
+    <AssociationSet Name="ServicoLimpeza" Association="masterModel.ServicoLimpeza">
+      <End Role="Servico" EntitySet="Servicos" />
+      <End Role="Limpeza" EntitySet="Limpezas" />
+    </AssociationSet>
     <AssociationSet Name="ClienteCasa" Association="masterModel.ClienteCasa">
-      <End Role="Cliente" EntitySet="Clientes" />
-      <End Role="Casa" EntitySet="Casas" />
+      <End EntitySet="Clientes" Role="Cliente" />
+      <End EntitySet="Casas" Role="Casa" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Cliente">
@@ -89,7 +89,6 @@
     <Property Name="Tipo" Type="String" Nullable="false" />
     <NavigationProperty Name="Limpezas" Relationship="masterModel.LimpezaCasa" FromRole="Casa" ToRole="Limpeza" />
     <NavigationProperty Name="Proprientario" Relationship="masterModel.ClienteCasa" FromRole="Casa" ToRole="Cliente" />
-    <Property Name="ClienteIdCliente" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Servico">
     <Key>
@@ -99,7 +98,7 @@
     <Property Name="Descricao" Type="String" Nullable="false" />
     <Property Name="Valor" Type="Decimal" Nullable="false" />
     <Property Name="Unidades" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Limpezas" Relationship="masterModel.ServicoLimpeza" FromRole="Servico" ToRole="Limpeza" />
+    <NavigationProperty Name="Limpeza" Relationship="masterModel.ServicoLimpeza" FromRole="Servico" ToRole="Limpeza" />
   </EntityType>
   <EntityType Name="Limpeza">
     <Key>
@@ -107,23 +106,9 @@
     </Key>
     <Property Name="IdLimpeza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Data" Type="DateTime" Nullable="false" />
-    <Property Name="ServicoIdServico" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Servicos" Relationship="masterModel.ServicoLimpeza" FromRole="Limpeza" ToRole="Servico" />
-    <Property Name="ServicoIdServico1" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Casa" Relationship="masterModel.LimpezaCasa" FromRole="Limpeza" ToRole="Casa" />
+    <NavigationProperty Name="Servicos" Relationship="masterModel.ServicoLimpeza" FromRole="Limpeza" ToRole="Servico" />
   </EntityType>
-  <Association Name="ServicoLimpeza">
-    <End Type="masterModel.Servico" Role="Servico" Multiplicity="1" />
-    <End Type="masterModel.Limpeza" Role="Limpeza" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Servico">
-        <PropertyRef Name="IdServico" />
-      </Principal>
-      <Dependent Role="Limpeza">
-        <PropertyRef Name="ServicoIdServico1" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="LimpezaCasa">
     <End Type="masterModel.Limpeza" Role="Limpeza" Multiplicity="*" />
     <End Type="masterModel.Casa" Role="Casa" Multiplicity="0..1" />
@@ -161,16 +146,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ServicoLimpeza">
+    <End Type="masterModel.Servico" Role="Servico" Multiplicity="*" />
+    <End Type="masterModel.Limpeza" Role="Limpeza" Multiplicity="0..1" />
+  </Association>
   <Association Name="ClienteCasa">
-    <End Type="masterModel.Cliente" Role="Cliente" Multiplicity="1" />
-    <End Type="masterModel.Casa" Role="Casa" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cliente">
-        <PropertyRef Name="IdCliente" />
-      </Principal>
-      <Dependent Role="Casa">
-        <PropertyRef Name="ClienteIdCliente" />
-      </Dependent>
-    </ReferentialConstraint>
+    <End Type="masterModel.Cliente" Multiplicity="1" Role="Cliente">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="masterModel.Casa" Multiplicity="*" Role="Casa" />
   </Association>
 </Schema>

@@ -14,12 +14,17 @@ namespace Projeto_DA
     
     public partial class Limpeza
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Limpeza()
+        {
+            this.Servicos = new HashSet<Servico>();
+        }
+    
         public int IdLimpeza { get; set; }
         public System.DateTime Data { get; set; }
-        public int ServicoIdServico { get; set; }
-        public int ServicoIdServico1 { get; set; }
     
-        public virtual Servico Servicos { get; set; }
         public virtual Casa Casa { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Servico> Servicos { get; set; }
     }
 }

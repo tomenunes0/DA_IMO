@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/19/2020 21:26:48
--- Generated from EDMX file: C:\Users\AlexScorpion100\OneDrive\Ambiente de Trabalho\Projeto_DA\Home\Imobiliriaria_DB.edmx
+-- Date Created: 05/20/2020 11:30:59
+-- Generated from EDMX file: D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\Imobiliriaria_DB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -21,9 +21,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ArrendamentoCasaArrendavel]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Casas_CasaArrendavel] DROP CONSTRAINT [FK_ArrendamentoCasaArrendavel];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ServicoLimpeza]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Limpezas] DROP CONSTRAINT [FK_ServicoLimpeza];
-GO
 IF OBJECT_ID(N'[dbo].[FK_LimpezaCasa]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Limpezas] DROP CONSTRAINT [FK_LimpezaCasa];
 GO
@@ -32,6 +29,9 @@ IF OBJECT_ID(N'[dbo].[FK_VendaCasaVendavel]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_ClienteVenda]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Vendas] DROP CONSTRAINT [FK_ClienteVenda];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ServicoLimpeza]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Servicos] DROP CONSTRAINT [FK_ServicoLimpeza];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ClienteCasa]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Casas] DROP CONSTRAINT [FK_ClienteCasa];
@@ -108,7 +108,7 @@ CREATE TABLE [dbo].[Casas] (
     [NumeroWC] int  NOT NULL,
     [NumerosPisos] int  NOT NULL,
     [Tipo] nvarchar(max)  NOT NULL,
-    [ClienteIdCliente] int  NOT NULL
+    [Proprientario_IdCliente] int  NOT NULL
 );
 GO
 
@@ -117,7 +117,8 @@ CREATE TABLE [dbo].[Servicos] (
     [IdServico] int IDENTITY(1,1) NOT NULL,
     [Descricao] nvarchar(max)  NOT NULL,
     [Valor] decimal(18,0)  NOT NULL,
-    [Unidades] int  NOT NULL
+    [Unidades] int  NOT NULL,
+    [Limpeza_IdLimpeza] int  NULL
 );
 GO
 
@@ -125,8 +126,6 @@ GO
 CREATE TABLE [dbo].[Limpezas] (
     [IdLimpeza] int IDENTITY(1,1) NOT NULL,
     [Data] datetime  NOT NULL,
-    [ServicoIdServico] int  NOT NULL,
-    [ServicoIdServico1] int  NOT NULL,
     [Casa_IdCasa] int  NULL
 );
 GO
@@ -245,21 +244,6 @@ ON [dbo].[Casas_CasaArrendavel]
     ([Arrendamentos_IdArrendamento]);
 GO
 
--- Creating foreign key on [ServicoIdServico1] in table 'Limpezas'
-ALTER TABLE [dbo].[Limpezas]
-ADD CONSTRAINT [FK_ServicoLimpeza]
-    FOREIGN KEY ([ServicoIdServico1])
-    REFERENCES [dbo].[Servicos]
-        ([IdServico])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ServicoLimpeza'
-CREATE INDEX [IX_FK_ServicoLimpeza]
-ON [dbo].[Limpezas]
-    ([ServicoIdServico1]);
-GO
-
 -- Creating foreign key on [Casa_IdCasa] in table 'Limpezas'
 ALTER TABLE [dbo].[Limpezas]
 ADD CONSTRAINT [FK_LimpezaCasa]
@@ -305,19 +289,34 @@ ON [dbo].[Vendas]
     ([ClienteIdCliente]);
 GO
 
--- Creating foreign key on [ClienteIdCliente] in table 'Casas'
+-- Creating foreign key on [Limpeza_IdLimpeza] in table 'Servicos'
+ALTER TABLE [dbo].[Servicos]
+ADD CONSTRAINT [FK_ServicoLimpeza]
+    FOREIGN KEY ([Limpeza_IdLimpeza])
+    REFERENCES [dbo].[Limpezas]
+        ([IdLimpeza])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ServicoLimpeza'
+CREATE INDEX [IX_FK_ServicoLimpeza]
+ON [dbo].[Servicos]
+    ([Limpeza_IdLimpeza]);
+GO
+
+-- Creating foreign key on [Proprientario_IdCliente] in table 'Casas'
 ALTER TABLE [dbo].[Casas]
 ADD CONSTRAINT [FK_ClienteCasa]
-    FOREIGN KEY ([ClienteIdCliente])
+    FOREIGN KEY ([Proprientario_IdCliente])
     REFERENCES [dbo].[Clientes]
         ([IdCliente])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ClienteCasa'
 CREATE INDEX [IX_FK_ClienteCasa]
 ON [dbo].[Casas]
-    ([ClienteIdCliente]);
+    ([Proprientario_IdCliente]);
 GO
 
 -- Creating foreign key on [IdCasa] in table 'Casas_CasaArrendavel'

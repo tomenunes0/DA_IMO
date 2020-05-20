@@ -48,3 +48,20 @@ C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\obj\Debug\Projeto_DA
 C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\obj\Debug\Projeto_DA.csproj.CopyComplete
 C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\obj\Debug\Projeto_DA.exe
 C:\Users\AlexScorpion100\source\repos\Projeto_DA\Projeto_DA\obj\Debug\Projeto_DA.pdb
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\bin\Debug\Projeto_DA.exe.config
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\bin\Debug\Projeto_DA.exe
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\bin\Debug\Projeto_DA.pdb
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\bin\Debug\EntityFramework.dll
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\bin\Debug\EntityFramework.SqlServer.dll
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\bin\Debug\EntityFramework.xml
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\bin\Debug\EntityFramework.SqlServer.xml
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Projeto_DA.csprojAssemblyReference.cache
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Home.GerirCasas.resources
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Home.GerirClientes.resources
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Home.Home.resources
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Projeto_DA.Properties.Resources.resources
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Projeto_DA.csproj.GenerateResource.cache
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Projeto_DA.csproj.CoreCompileInputs.cache
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Projeto_DA.csproj.CopyComplete
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Projeto_DA.exe
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Projeto_DA.pdb

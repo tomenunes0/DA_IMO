@@ -14,18 +14,11 @@ namespace Projeto_DA
     
     public partial class Servico
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Servico()
-        {
-            this.Limpezas = new HashSet<Limpeza>();
-        }
-    
         public int IdServico { get; set; }
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
         public int Unidades { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Limpeza> Limpezas { get; set; }
+        public virtual Limpeza Limpeza { get; set; }
     }
 }
