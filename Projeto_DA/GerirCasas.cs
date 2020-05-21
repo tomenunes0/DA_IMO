@@ -186,8 +186,7 @@ namespace Home
                 nudWC.Value = casaSelecionada.NumeroWC;
                 nudPisos.Value = casaSelecionada.NumerosPisos;
                 cbTipoDeMoradia.Text = casaSelecionada.Tipo;
-              
-                //cb_Clientes.Text = imobiliaria.Client casaSelecionada.IdCasa.ToString();   
+                cb_Clientes.Text = casaSelecionada.Proprientario.ToString();   
                 btnGerirLimpezas.Text = "Gerir Limpezas (Total: " + casaSelecionada.Limpezas.Count().ToString() + ")";
             }  
         }
