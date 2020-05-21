@@ -208,7 +208,7 @@
             this.btnGerirLimpezas.Name = "btnGerirLimpezas";
             this.btnGerirLimpezas.Size = new System.Drawing.Size(578, 35);
             this.btnGerirLimpezas.TabIndex = 47;
-            this.btnGerirLimpezas.Text = "GerirLimpezas";
+            this.btnGerirLimpezas.Text = "Gerir Limpezas";
             this.btnGerirLimpezas.UseVisualStyleBackColor = false;
             this.btnGerirLimpezas.Click += new System.EventHandler(this.btnGerirLimpezas_Click);
             // 
@@ -226,7 +226,7 @@
             this.gbDadosVenda.Size = new System.Drawing.Size(286, 241);
             this.gbDadosVenda.TabIndex = 45;
             this.gbDadosVenda.TabStop = false;
-            this.gbDadosVenda.Text = "Dados de Arrendamento";
+            this.gbDadosVenda.Text = "Dados de Venda";
             // 
             // label19
             // 
@@ -260,8 +260,9 @@
             this.btnVerVenda.Name = "btnVerVenda";
             this.btnVerVenda.Size = new System.Drawing.Size(147, 46);
             this.btnVerVenda.TabIndex = 58;
-            this.btnVerVenda.Text = "Ver/Criar";
+            this.btnVerVenda.Text = "Ver";
             this.btnVerVenda.UseVisualStyleBackColor = false;
+            this.btnVerVenda.Click += new System.EventHandler(this.btnVerVenda_Click);
             // 
             // textBox6
             // 

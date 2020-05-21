@@ -60,6 +60,7 @@
     <Compile Include="Arrendamento.cs">
       <DependentUpon>Imobiliriaria_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Arrendamentos_Cod.cs" />
     <Compile Include="Casa.cs">
       <DependentUpon>Imobiliriaria_DB.tt</DependentUpon>
     </Compile>
@@ -138,6 +139,10 @@
     <Compile Include="Venda.cs">
       <DependentUpon>Imobiliriaria_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Vendas_Cod.cs" />
+    <EmbeddedResource Include="DadosVenda.resx">
+      <DependentUpon>DadosVenda.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GerirCasas.resx">
       <DependentUpon>GerirCasas.cs</DependentUpon>
     </EmbeddedResource>

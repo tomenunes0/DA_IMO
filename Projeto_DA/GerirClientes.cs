@@ -94,6 +94,8 @@ namespace Home
             }
             //Chamar a funcao para atualizar as lista das casas
             atualiza_Casas();
+            atualizar_Arrendamentos();
+            atualizar_Aquisicoes();
 
         }
 
@@ -314,6 +316,24 @@ namespace Home
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void atualizar_Arrendamentos()
+        {
+            if (clienteSelecionado != null)
+            {
+                lb_Arrendamentos.DataSource = null;
+                lb_Arrendamentos.DataSource = clienteSelecionado.Arrendamentos.ToList<Arrendamento>();
+            }
+        }
+
+        private void atualizar_Aquisicoes()
+        {
+            if (clienteSelecionado != null)
+            {
+                lb_Aquisicoes.DataSource = null;
+                lb_Aquisicoes.DataSource = clienteSelecionado.Aquisicoes.ToList<Venda>();
             }
         }
 

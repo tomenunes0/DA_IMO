@@ -32,8 +32,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblInformacaoCasa = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnRemover = new System.Windows.Forms.Button();
             this.lb_ListaDeLimpezas = new System.Windows.Forms.ListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnRemoverServicos = new System.Windows.Forms.Button();
             this.lb_ListaDeServicos = new System.Windows.Forms.ListBox();
             this.btnNovoServico = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,8 +47,6 @@
             this.btnEmiteFatura = new System.Windows.Forms.Button();
             this.btnNovaLimpeza = new System.Windows.Forms.Button();
             this.dtpDataDaLimpeza = new System.Windows.Forms.DateTimePicker();
-            this.btnRemover = new System.Windows.Forms.Button();
-            this.btnRemoverServicos = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -88,6 +88,24 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de Limpezas";
             // 
+            // btnRemover
+            // 
+            this.btnRemover.BackColor = System.Drawing.Color.DarkRed;
+            this.btnRemover.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRemover.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnRemover.FlatAppearance.BorderSize = 5;
+            this.btnRemover.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnRemover.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemover.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
+            this.btnRemover.ForeColor = System.Drawing.Color.White;
+            this.btnRemover.Location = new System.Drawing.Point(6, 371);
+            this.btnRemover.Name = "btnRemover";
+            this.btnRemover.Size = new System.Drawing.Size(399, 46);
+            this.btnRemover.TabIndex = 30;
+            this.btnRemover.Text = "Remover ❌";
+            this.btnRemover.UseVisualStyleBackColor = false;
+            this.btnRemover.Click += new System.EventHandler(this.btnRemover_Click);
+            // 
             // lb_ListaDeLimpezas
             // 
             this.lb_ListaDeLimpezas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -118,6 +136,24 @@
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Lista de Limpezas";
+            // 
+            // btnRemoverServicos
+            // 
+            this.btnRemoverServicos.BackColor = System.Drawing.Color.DarkRed;
+            this.btnRemoverServicos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRemoverServicos.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnRemoverServicos.FlatAppearance.BorderSize = 5;
+            this.btnRemoverServicos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnRemoverServicos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemoverServicos.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
+            this.btnRemoverServicos.ForeColor = System.Drawing.Color.White;
+            this.btnRemoverServicos.Location = new System.Drawing.Point(6, 464);
+            this.btnRemoverServicos.Name = "btnRemoverServicos";
+            this.btnRemoverServicos.Size = new System.Drawing.Size(699, 46);
+            this.btnRemoverServicos.TabIndex = 31;
+            this.btnRemoverServicos.Text = "Remover ❌";
+            this.btnRemoverServicos.UseVisualStyleBackColor = false;
+            this.btnRemoverServicos.Click += new System.EventHandler(this.btnRemoverServicos_Click);
             // 
             // lb_ListaDeServicos
             // 
@@ -237,6 +273,7 @@
             this.btnEmiteFatura.TabIndex = 29;
             this.btnEmiteFatura.Text = "Emitir Fatura ➕";
             this.btnEmiteFatura.UseVisualStyleBackColor = false;
+            this.btnEmiteFatura.Click += new System.EventHandler(this.btnEmiteFatura_Click);
             // 
             // btnNovaLimpeza
             // 
@@ -262,42 +299,6 @@
             this.dtpDataDaLimpeza.Name = "dtpDataDaLimpeza";
             this.dtpDataDaLimpeza.Size = new System.Drawing.Size(338, 30);
             this.dtpDataDaLimpeza.TabIndex = 0;
-            // 
-            // btnRemover
-            // 
-            this.btnRemover.BackColor = System.Drawing.Color.DarkRed;
-            this.btnRemover.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRemover.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnRemover.FlatAppearance.BorderSize = 5;
-            this.btnRemover.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnRemover.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRemover.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
-            this.btnRemover.ForeColor = System.Drawing.Color.White;
-            this.btnRemover.Location = new System.Drawing.Point(6, 371);
-            this.btnRemover.Name = "btnRemover";
-            this.btnRemover.Size = new System.Drawing.Size(399, 46);
-            this.btnRemover.TabIndex = 30;
-            this.btnRemover.Text = "Remover ❌";
-            this.btnRemover.UseVisualStyleBackColor = false;
-            this.btnRemover.Click += new System.EventHandler(this.btnRemover_Click);
-            // 
-            // btnRemoverServicos
-            // 
-            this.btnRemoverServicos.BackColor = System.Drawing.Color.DarkRed;
-            this.btnRemoverServicos.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRemoverServicos.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnRemoverServicos.FlatAppearance.BorderSize = 5;
-            this.btnRemoverServicos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnRemoverServicos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRemoverServicos.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
-            this.btnRemoverServicos.ForeColor = System.Drawing.Color.White;
-            this.btnRemoverServicos.Location = new System.Drawing.Point(6, 464);
-            this.btnRemoverServicos.Name = "btnRemoverServicos";
-            this.btnRemoverServicos.Size = new System.Drawing.Size(699, 46);
-            this.btnRemoverServicos.TabIndex = 31;
-            this.btnRemoverServicos.Text = "Remover ❌";
-            this.btnRemoverServicos.UseVisualStyleBackColor = false;
-            this.btnRemoverServicos.Click += new System.EventHandler(this.btnRemoverServicos_Click);
             // 
             // GerirLimpezas
             // 

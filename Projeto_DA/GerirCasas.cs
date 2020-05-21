@@ -124,7 +124,7 @@ namespace Home
             //Marcar o cliente selecionado para null
             clienteSelecionado = null;
             //Carregar o cliente selecionado da text box para a variavel
-            clienteSelecionado = (Cliente)cb_Clientes.SelectedItem;
+            clienteSelecionado = (Cliente)cb_Clientes.SelectedItem;    
         }
 
         //Filtrar a data grid view pela localidade que foi metido na text box
@@ -170,6 +170,7 @@ namespace Home
         private void casaDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             //Para ir buscar a casa que foi selecionada na data grid view
+            casaSelecionada = null;
             casaSelecionada = (Casa)casaDataGridView.CurrentRow.DataBoundItem;
             //Verificar se existe alguma casa ja selecionada
             if (casaSelecionada != null)
@@ -185,7 +186,9 @@ namespace Home
                 nudWC.Value = casaSelecionada.NumeroWC;
                 nudPisos.Value = casaSelecionada.NumerosPisos;
                 cbTipoDeMoradia.Text = casaSelecionada.Tipo;
-                //cb_Clientes.Text = imobiliaria.Client casaSelecionada.IdCasa.ToString();
+              
+                //cb_Clientes.Text = imobiliaria.Client casaSelecionada.IdCasa.ToString();   
+                btnGerirLimpezas.Text = "Gerir Limpezas (Total: " + casaSelecionada.Limpezas.Count().ToString() + ")";
             }  
         }
 
@@ -234,6 +237,14 @@ namespace Home
         private void btnRemover_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnVerVenda_Click(object sender, EventArgs e)
+        {
+            //Perparar para abrir o form 1 
+            DadosVenda frm = new DadosVenda(casaSelecionada, arrenvendavel, imobiliaria);
+            //Mostar o form 1
+            frm.Show();
         }
     }
 }
