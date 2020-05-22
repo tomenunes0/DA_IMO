@@ -54,10 +54,10 @@
             this.btnFilter = new System.Windows.Forms.Button();
             this.txtNome_Filter = new System.Windows.Forms.TextBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.clienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nifDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contactoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -225,6 +225,7 @@
             // txtNif
             // 
             this.txtNif.Location = new System.Drawing.Point(13, 116);
+            this.txtNif.MaxLength = 8;
             this.txtNif.Name = "txtNif";
             this.txtNif.Size = new System.Drawing.Size(383, 30);
             this.txtNif.TabIndex = 21;
@@ -358,30 +359,36 @@
             this.timer.Enabled = true;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // clienteBindingSource
+            // 
+            this.clienteBindingSource.DataSource = typeof(Projeto_DA.Cliente);
+            // 
             // nomeDataGridViewTextBoxColumn
             // 
+            this.nomeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
             this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
             this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
             this.nomeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nomeDataGridViewTextBoxColumn.Width = 87;
             // 
             // nifDataGridViewTextBoxColumn
             // 
+            this.nifDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.nifDataGridViewTextBoxColumn.DataPropertyName = "Nif";
             this.nifDataGridViewTextBoxColumn.HeaderText = "Nif";
             this.nifDataGridViewTextBoxColumn.Name = "nifDataGridViewTextBoxColumn";
             this.nifDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nifDataGridViewTextBoxColumn.Width = 67;
             // 
             // contactoDataGridViewTextBoxColumn
             // 
+            this.contactoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.contactoDataGridViewTextBoxColumn.DataPropertyName = "Contacto";
             this.contactoDataGridViewTextBoxColumn.HeaderText = "Contacto";
             this.contactoDataGridViewTextBoxColumn.Name = "contactoDataGridViewTextBoxColumn";
             this.contactoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // clienteBindingSource
-            // 
-            this.clienteBindingSource.DataSource = typeof(Projeto_DA.Cliente);
+            this.contactoDataGridViewTextBoxColumn.Width = 113;
             // 
             // GerirClientes
             // 
@@ -437,9 +444,9 @@
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.TextBox txtNome_Filter;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.BindingSource clienteBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nifDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn contactoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource clienteBindingSource;
     }
 }

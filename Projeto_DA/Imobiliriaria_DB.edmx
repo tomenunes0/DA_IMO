@@ -12,15 +12,11 @@
     <EntitySet Name="Servicos" EntityType="masterModel.Store.Servicos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Limpezas" EntityType="masterModel.Store.Limpezas" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Vendas" EntityType="masterModel.Store.Vendas" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Casas_CasaArrendavel" EntityType="masterModel.Store.Casas_CasaArrendavel" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Casas_CasaVendavel" EntityType="masterModel.Store.Casas_CasaVendavel" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Casas_CasaArrendavel" EntityType="masterModel.Store.Casas_CasaArrendavel" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="ClienteArrendamento" Association="masterModel.Store.ClienteArrendamento">
       <End Role="Cliente" EntitySet="Clientes" />
       <End Role="Arrendamento" EntitySet="Arrendamentos" />
-    </AssociationSet>
-    <AssociationSet Name="ArrendamentoCasaArrendavel" Association="masterModel.Store.ArrendamentoCasaArrendavel">
-      <End Role="Arrendamento" EntitySet="Arrendamentos" />
-      <End Role="CasaArrendavel" EntitySet="Casas_CasaArrendavel" />
     </AssociationSet>
     <AssociationSet Name="LimpezaCasa" Association="masterModel.Store.LimpezaCasa">
       <End Role="Limpeza" EntitySet="Limpezas" />
@@ -30,10 +26,6 @@
       <End Role="Venda" EntitySet="Vendas" />
       <End Role="CasaVendavel" EntitySet="Casas_CasaVendavel" />
     </AssociationSet>
-    <AssociationSet Name="ClienteVenda" Association="masterModel.Store.ClienteVenda">
-      <End Role="Cliente" EntitySet="Clientes" />
-      <End Role="Venda" EntitySet="Vendas" />
-    </AssociationSet>
     <AssociationSet Name="ServicoLimpeza" Association="masterModel.Store.ServicoLimpeza">
       <End Role="Servico" EntitySet="Servicos" />
       <End Role="Limpeza" EntitySet="Limpezas" />
@@ -42,13 +34,21 @@
       <End Role="Cliente" EntitySet="Clientes" />
       <End Role="Casa" EntitySet="Casas" />
     </AssociationSet>
-    <AssociationSet Name="FK_CasaArrendavel_inherits_Casa" Association="masterModel.Store.FK_CasaArrendavel_inherits_Casa">
-      <End Role="Casa" EntitySet="Casas" />
+    <AssociationSet Name="ClienteVenda" Association="masterModel.Store.ClienteVenda">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="Venda" EntitySet="Vendas" />
+    </AssociationSet>
+    <AssociationSet Name="ArrendamentoCasaArrendavel" Association="masterModel.Store.ArrendamentoCasaArrendavel">
+      <End Role="Arrendamento" EntitySet="Arrendamentos" />
       <End Role="CasaArrendavel" EntitySet="Casas_CasaArrendavel" />
     </AssociationSet>
     <AssociationSet Name="FK_CasaVendavel_inherits_Casa" Association="masterModel.Store.FK_CasaVendavel_inherits_Casa">
       <End Role="Casa" EntitySet="Casas" />
       <End Role="CasaVendavel" EntitySet="Casas_CasaVendavel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CasaArrendavel_inherits_Casa" Association="masterModel.Store.FK_CasaArrendavel_inherits_Casa">
+      <End Role="Casa" EntitySet="Casas" />
+      <End Role="CasaArrendavel" EntitySet="Casas_CasaArrendavel" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clientes">
@@ -113,8 +113,16 @@
     <Property Name="DataVenda" Type="datetime" Nullable="false" />
     <Property Name="ValorNegociado" Type="decimal" Nullable="false" />
     <Property Name="ComissaoNegocio" Type="decimal" Nullable="false" />
-    <Property Name="ClienteIdCliente" Type="int" Nullable="false" />
     <Property Name="CasaVendavel_IdCasa" Type="int" Nullable="false" />
+    <Property Name="Comprador_IdCliente" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Casas_CasaVendavel">
+    <Key>
+      <PropertyRef Name="IdCasa" />
+    </Key>
+    <Property Name="ValorBaseVenda" Type="decimal" Nullable="false" />
+    <Property Name="ValorComissao" Type="decimal" Nullable="false" />
+    <Property Name="IdCasa" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Casas_CasaArrendavel">
     <Key>
@@ -125,14 +133,6 @@
     <Property Name="IdCasa" Type="int" Nullable="false" />
     <Property Name="Arrendamentos_IdArrendamento" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Casas_CasaVendavel">
-    <Key>
-      <PropertyRef Name="IdCasa" />
-    </Key>
-    <Property Name="ValorBaseVenda" Type="decimal" Nullable="false" />
-    <Property Name="ValorComissao" Type="decimal" Nullable="false" />
-    <Property Name="IdCasa" Type="int" Nullable="false" />
-  </EntityType>
   <Association Name="ClienteArrendamento">
     <End Role="Cliente" Type="masterModel.Store.Clientes" Multiplicity="1" />
     <End Role="Arrendamento" Type="masterModel.Store.Arrendamentos" Multiplicity="*" />
@@ -142,18 +142,6 @@
       </Principal>
       <Dependent Role="Arrendamento">
         <PropertyRef Name="Arrendatario_IdCliente" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ArrendamentoCasaArrendavel">
-    <End Role="Arrendamento" Type="masterModel.Store.Arrendamentos" Multiplicity="1" />
-    <End Role="CasaArrendavel" Type="masterModel.Store.Casas_CasaArrendavel" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Arrendamento">
-        <PropertyRef Name="IdArrendamento" />
-      </Principal>
-      <Dependent Role="CasaArrendavel">
-        <PropertyRef Name="Arrendamentos_IdArrendamento" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -178,18 +166,6 @@
       </Principal>
       <Dependent Role="Venda">
         <PropertyRef Name="CasaVendavel_IdCasa" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ClienteVenda">
-    <End Role="Cliente" Type="masterModel.Store.Clientes" Multiplicity="1" />
-    <End Role="Venda" Type="masterModel.Store.Vendas" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cliente">
-        <PropertyRef Name="IdCliente" />
-      </Principal>
-      <Dependent Role="Venda">
-        <PropertyRef Name="ClienteIdCliente" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -219,17 +195,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CasaArrendavel_inherits_Casa">
-    <End Role="Casa" Type="masterModel.Store.Casas" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="CasaArrendavel" Type="masterModel.Store.Casas_CasaArrendavel" Multiplicity="0..1" />
+  <Association Name="ClienteVenda">
+    <End Role="Cliente" Type="masterModel.Store.Clientes" Multiplicity="1" />
+    <End Role="Venda" Type="masterModel.Store.Vendas" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Casa">
-        <PropertyRef Name="IdCasa" />
+      <Principal Role="Cliente">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="Venda">
+        <PropertyRef Name="Comprador_IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ArrendamentoCasaArrendavel">
+    <End Role="Arrendamento" Type="masterModel.Store.Arrendamentos" Multiplicity="1" />
+    <End Role="CasaArrendavel" Type="masterModel.Store.Casas_CasaArrendavel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Arrendamento">
+        <PropertyRef Name="IdArrendamento" />
       </Principal>
       <Dependent Role="CasaArrendavel">
-        <PropertyRef Name="IdCasa" />
+        <PropertyRef Name="Arrendamentos_IdArrendamento" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -247,6 +233,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_CasaArrendavel_inherits_Casa">
+    <End Role="Casa" Type="masterModel.Store.Casas" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CasaArrendavel" Type="masterModel.Store.Casas_CasaArrendavel" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Casa">
+        <PropertyRef Name="IdCasa" />
+      </Principal>
+      <Dependent Role="CasaArrendavel">
+        <PropertyRef Name="IdCasa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -257,10 +257,6 @@
           <AssociationSet Name="ClienteArrendamento" Association="masterModel.ClienteArrendamento">
             <End Role="Cliente" EntitySet="Clientes" />
             <End Role="Arrendamento" EntitySet="Arrendamentos" />
-          </AssociationSet>
-          <AssociationSet Name="ArrendamentoCasaArrendavel" Association="masterModel.ArrendamentoCasaArrendavel">
-            <End Role="Arrendamento" EntitySet="Arrendamentos" />
-            <End Role="CasaArrendavel" EntitySet="Casas" />
           </AssociationSet>
           <EntitySet Name="Casas" EntityType="masterModel.Casa" />
           <EntitySet Name="Servicos" EntityType="masterModel.Servico" />
@@ -274,10 +270,6 @@
             <End Role="Venda" EntitySet="Vendas" />
             <End Role="CasaVendavel" EntitySet="Casas" />
           </AssociationSet>
-          <AssociationSet Name="ClienteVenda" Association="masterModel.ClienteVenda">
-            <End Role="Cliente" EntitySet="Clientes" />
-            <End Role="Venda" EntitySet="Vendas" />
-          </AssociationSet>
           <AssociationSet Name="ServicoLimpeza" Association="masterModel.ServicoLimpeza">
             <End Role="Servico" EntitySet="Servicos" />
             <End Role="Limpeza" EntitySet="Limpezas" />
@@ -285,6 +277,14 @@
           <AssociationSet Name="ClienteCasa" Association="masterModel.ClienteCasa">
             <End EntitySet="Clientes" Role="Cliente" />
             <End EntitySet="Casas" Role="Casa" />
+          </AssociationSet>
+          <AssociationSet Name="ClienteVenda" Association="masterModel.ClienteVenda">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Venda" EntitySet="Vendas" />
+          </AssociationSet>
+          <AssociationSet Name="ArrendamentoCasaArrendavel" Association="masterModel.ArrendamentoCasaArrendavel">
+            <End Role="Arrendamento" EntitySet="Arrendamentos" />
+            <End Role="CasaArrendavel" EntitySet="Casas" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cliente">
@@ -297,8 +297,8 @@
           <Property Name="Morada" Type="String" Nullable="false" />
           <Property Name="Contacto" Type="String" Nullable="false" />
           <NavigationProperty Name="Arrendamentos" Relationship="masterModel.ClienteArrendamento" FromRole="Cliente" ToRole="Arrendamento" />
-          <NavigationProperty Name="Aquisicoes" Relationship="masterModel.ClienteVenda" FromRole="Cliente" ToRole="Venda" />
           <NavigationProperty Name="Casas" Relationship="masterModel.ClienteCasa" FromRole="Cliente" ToRole="Casa" />
+          <NavigationProperty Name="Aquisicoes" Relationship="masterModel.ClienteVenda" FromRole="Cliente" ToRole="Venda" />
         </EntityType>
         <EntityType Name="Arrendamento">
           <Key>
@@ -320,10 +320,6 @@
           <Property Name="Comissao" Type="Decimal" Nullable="false" />
           <NavigationProperty Name="Arrendamentos" Relationship="masterModel.ArrendamentoCasaArrendavel" FromRole="CasaArrendavel" ToRole="Arrendamento" />
         </EntityType>
-        <Association Name="ArrendamentoCasaArrendavel">
-          <End Type="masterModel.Arrendamento" Role="Arrendamento" Multiplicity="1" />
-          <End Type="masterModel.CasaArrendavel" Role="CasaArrendavel" Multiplicity="*" />
-        </Association>
         <EntityType Name="Casa">
           <Key>
             <PropertyRef Name="IdCasa" />
@@ -379,23 +375,10 @@
           <Property Name="ComissaoNegocio" Type="Decimal" Nullable="false" />
           <NavigationProperty Name="CasaVendavel" Relationship="masterModel.VendaCasaVendavel" FromRole="Venda" ToRole="CasaVendavel" />
           <NavigationProperty Name="Comprador" Relationship="masterModel.ClienteVenda" FromRole="Venda" ToRole="Cliente" />
-          <Property Name="ClienteIdCliente" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="VendaCasaVendavel">
           <End Type="masterModel.Venda" Role="Venda" Multiplicity="0..1" />
           <End Type="masterModel.CasaVendavel" Role="CasaVendavel" Multiplicity="1" />
-        </Association>
-        <Association Name="ClienteVenda">
-          <End Type="masterModel.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="masterModel.Venda" Role="Venda" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="IdCliente" />
-            </Principal>
-            <Dependent Role="Venda">
-              <PropertyRef Name="ClienteIdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
         </Association>
         <Association Name="ServicoLimpeza">
           <End Type="masterModel.Servico" Role="Servico" Multiplicity="*" />
@@ -407,6 +390,14 @@
           </End>
           <End Type="masterModel.Casa" Multiplicity="*" Role="Casa">
           </End>
+        </Association>
+        <Association Name="ClienteVenda">
+          <End Type="masterModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="masterModel.Venda" Role="Venda" Multiplicity="*" />
+        </Association>
+        <Association Name="ArrendamentoCasaArrendavel">
+          <End Type="masterModel.Arrendamento" Role="Arrendamento" Multiplicity="1" />
+          <End Type="masterModel.CasaArrendavel" Role="CasaArrendavel" Multiplicity="0..1" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -450,18 +441,18 @@
           <ScalarProperty Name="Tipo" ColumnName="Tipo" />
         </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(masterModel.CasaArrendavel)">
-        <MappingFragment StoreEntitySet="Casas_CasaArrendavel">
-          <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
-          <ScalarProperty Name="ValorBaseMes" ColumnName="ValorBaseMes" />
-          <ScalarProperty Name="Comissao" ColumnName="Comissao" />
-        </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(masterModel.CasaVendavel)">
         <MappingFragment StoreEntitySet="Casas_CasaVendavel">
           <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
           <ScalarProperty Name="ValorBaseVenda" ColumnName="ValorBaseVenda" />
           <ScalarProperty Name="ValorComissao" ColumnName="ValorComissao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(masterModel.CasaArrendavel)">
+        <MappingFragment StoreEntitySet="Casas_CasaArrendavel">
+          <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
+          <ScalarProperty Name="ValorBaseMes" ColumnName="ValorBaseMes" />
+          <ScalarProperty Name="Comissao" ColumnName="Comissao" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -490,7 +481,6 @@
           <ScalarProperty Name="DataVenda" ColumnName="DataVenda" />
           <ScalarProperty Name="ValorNegociado" ColumnName="ValorNegociado" />
           <ScalarProperty Name="ComissaoNegocio" ColumnName="ComissaoNegocio" />
-          <ScalarProperty Name="ClienteIdCliente" ColumnName="ClienteIdCliente" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -500,14 +490,6 @@
       </EndProperty>
       <EndProperty Name="Arrendamento">
         <ScalarProperty Name="IdArrendamento" ColumnName="IdArrendamento" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="ArrendamentoCasaArrendavel" TypeName="masterModel.ArrendamentoCasaArrendavel" StoreEntitySet="Casas_CasaArrendavel">
-      <EndProperty Name="Arrendamento">
-        <ScalarProperty Name="IdArrendamento" ColumnName="Arrendamentos_IdArrendamento" />
-      </EndProperty>
-      <EndProperty Name="CasaArrendavel">
-        <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="LimpezaCasa" TypeName="masterModel.LimpezaCasa" StoreEntitySet="Limpezas">
@@ -541,6 +523,22 @@
         <ScalarProperty Name="IdCliente" ColumnName="Proprientario_IdCliente" />
       </EndProperty>
       <EndProperty Name="Casa">
+        <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClienteVenda" TypeName="masterModel.ClienteVenda" StoreEntitySet="Vendas">
+      <EndProperty Name="Cliente">
+        <ScalarProperty Name="IdCliente" ColumnName="Comprador_IdCliente" />
+      </EndProperty>
+      <EndProperty Name="Venda">
+        <ScalarProperty Name="IdVenda" ColumnName="IdVenda" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ArrendamentoCasaArrendavel" TypeName="masterModel.ArrendamentoCasaArrendavel" StoreEntitySet="Casas_CasaArrendavel">
+      <EndProperty Name="Arrendamento">
+        <ScalarProperty Name="IdArrendamento" ColumnName="Arrendamentos_IdArrendamento" />
+      </EndProperty>
+      <EndProperty Name="CasaArrendavel">
         <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
       </EndProperty>
     </AssociationSetMapping>

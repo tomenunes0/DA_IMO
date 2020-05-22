@@ -12,6 +12,8 @@ using System.Windows.Forms;
 using Projeto_DA;
 using System.Data.Entity;
 using System.Windows.Controls;
+using Microsoft.AspNetCore.Mvc;
+using System.Windows.Documents;
 
 namespace Projeto_DA
 {
@@ -75,7 +77,8 @@ namespace Projeto_DA
                 //Depois de adicionado o serviço atualizar as duas listas
                 atualizar_ListaServicos();
                 atualizar_ListaLimpezas();
-            }else
+            }
+            else
                 MessageBox.Show("Verifique os campos e tente novamente!", "Adicionar Serviço", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
@@ -190,7 +193,7 @@ namespace Projeto_DA
             index = lb_ListaDeLimpezas.SelectedIndex;
             atualizar_ListaLimpezas();
         }
-        
+
         //Quando o index da lista for mudado 
         private void lb_ListaDeServicos_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -207,6 +210,13 @@ namespace Projeto_DA
 
         private void btnEmiteFatura_Click(object sender, EventArgs e)
         {
+            export();
+        }
+
+        private void export()
+        {
+            var csvData = limpezaSelecionada.Servicos.ToList<Servico>();
+            string csvFilePath = "fatura.csv";
 
         }
     }

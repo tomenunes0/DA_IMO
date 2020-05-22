@@ -14,19 +14,12 @@ namespace Projeto_DA
     
     public partial class Arrendamento
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Arrendamento()
-        {
-            this.CasaArrendavel = new HashSet<CasaArrendavel>();
-        }
-    
         public int IdArrendamento { get; set; }
         public string InicioContrado { get; set; }
         public System.DateTime DuracaoMeses { get; set; }
         public string Renovavel { get; set; }
     
         public virtual Cliente Arrendatario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CasaArrendavel> CasaArrendavel { get; set; }
+        public virtual CasaArrendavel CasaArrendavel { get; set; }
     }
 }

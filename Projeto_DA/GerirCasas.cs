@@ -34,6 +34,7 @@ namespace Home
             clienteSelecionado = null;
             //Adicionar os clientes da base de dados na combo box
             cb_Clientes.DataSource = imobiliaria.Clientes.ToList<Cliente>();
+            cb_Clientes.Text = "asdas dasd ";
         }
 
         private void btnFilter_Click(object sender, EventArgs e)
@@ -64,7 +65,7 @@ namespace Home
                 // chkVendavel.Checked = false;
                 arrenvendavel = chkArrendavel.Text;
             }
-            else 
+            else
                 gbDadosVenda.Enabled = true;
 
             if (chkVendavel.Checked == true)
@@ -93,29 +94,61 @@ namespace Home
         {
             //Chamar a Funcao para adicionar a nova casa
             nova_Casa();
-        
+
         }
         //Cirar nova casa
         private void nova_Casa()
         {
-            //Nova casa
-            Casa casaTemp = new Casa();
-            //Meter os dados da casa para a class para poder assim adicionar
-            casaTemp.Rua = txtRua.Text;
-            casaTemp.Localidade = txtLocalidade.Text;
-            casaTemp.Numero = txtNumero.Text;
-            casaTemp.Andar = txtAndar.Text;
-            casaTemp.Area = Convert.ToInt32(nudArea.Value);
-            casaTemp.NumeroAssoalhada = Convert.ToInt32(nudAssoalhadas.Value);
-            casaTemp.NumeroWC = Convert.ToInt32(nudWC.Value);
-            casaTemp.NumerosPisos = Convert.ToInt32(nudPisos.Value);
-            casaTemp.Tipo = cbTipoDeMoradia.Text;
-            //Guarda a casa no cliente selecionado na combo box
-            clienteSelecionado.Casas.Add(casaTemp);
-            //Guarda a imformaçao para a text box
-            imobiliaria.SaveChanges();
-            //Chamar a funcao atualizar a lista
-            atualizarListaCasas();
+            if (chkVendavel.Checked == true)
+            {
+                CasaVendavel casaVendavelTemp = new CasaVendavel();
+                //Meter os dados da casa para a class para poder assim adicionar
+                casaVendavelTemp.Rua = txtRua.Text;
+                casaVendavelTemp.Localidade = txtLocalidade.Text;
+                casaVendavelTemp.Numero = txtNumero.Text;
+                casaVendavelTemp.Andar = txtAndar.Text;
+                casaVendavelTemp.Area = Convert.ToInt32(nudArea.Value);
+                casaVendavelTemp.NumeroAssoalhada = Convert.ToInt32(nudAssoalhadas.Value);
+                casaVendavelTemp.NumeroWC = Convert.ToInt32(nudWC.Value);
+                casaVendavelTemp.NumerosPisos = Convert.ToInt32(nudPisos.Value);
+                casaVendavelTemp.Tipo = cbTipoDeMoradia.Text;       
+                casaVendavelTemp.ValorBaseVenda = Convert.ToDecimal(txtValorBaseNegociavel.Text);
+                casaVendavelTemp.ValorComissao = Convert.ToDecimal(txtComissaoBase.Text);
+
+                //Guarda a casa no cliente selecionado na combo box
+                clienteSelecionado.Casas.Add(casaVendavelTemp);
+                //Guarda a imformaçao para a text box
+                imobiliaria.SaveChanges();
+                //Chamar a funcao atualizar a lista
+                atualizarListaCasas();
+            }
+            else  if (chkArrendavel.Checked == true)
+            {
+                CasaArrendavel casaArrendavelTemp = new CasaArrendavel();
+                //Meter os dados da casa para a class para poder assim adicionar
+                casaArrendavelTemp.Rua = txtRua.Text;
+                casaArrendavelTemp.Localidade = txtLocalidade.Text;
+                casaArrendavelTemp.Numero = txtNumero.Text;
+                casaArrendavelTemp.Andar = txtAndar.Text;
+                casaArrendavelTemp.Area = Convert.ToInt32(nudArea.Value);
+                casaArrendavelTemp.NumeroAssoalhada = Convert.ToInt32(nudAssoalhadas.Value);
+                casaArrendavelTemp.NumeroWC = Convert.ToInt32(nudWC.Value);
+                casaArrendavelTemp.NumerosPisos = Convert.ToInt32(nudPisos.Value);
+                casaArrendavelTemp.Tipo = cbTipoDeMoradia.Text;
+                casaArrendavelTemp.ValorBaseMes = Convert.ToDecimal(txtArrendavelValorBase.Text);
+                casaArrendavelTemp.Comissao = Convert.ToDecimal(txtArrendavelComissao.Text);
+
+                //Guarda a casa no cliente selecionado na combo box
+                clienteSelecionado.Casas.Add(casaArrendavelTemp);
+                //Guarda a imformaçao para a text box
+                imobiliaria.SaveChanges();
+                //Chamar a funcao atualizar a lista
+                atualizarListaCasas();
+            }
+            else
+            {
+                MessageBox.Show("Ocurreu um erro ao adicionar a casa por favor verificar os campos.", "Adicionar Casa",MessageBoxButtons.OK, MessageBoxIcon.Error) ;
+            }
         }
 
         //Quando a combo box de proprientario for mudada
@@ -124,7 +157,7 @@ namespace Home
             //Marcar o cliente selecionado para null
             clienteSelecionado = null;
             //Carregar o cliente selecionado da text box para a variavel
-            clienteSelecionado = (Cliente)cb_Clientes.SelectedItem;    
+            clienteSelecionado = (Cliente)cb_Clientes.SelectedItem;
         }
 
         //Filtrar a data grid view pela localidade que foi metido na text box
@@ -169,26 +202,30 @@ namespace Home
         //quando a selecao da data grid view for mudada
         private void casaDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            //Para ir buscar a casa que foi selecionada na data grid view
-            casaSelecionada = null;
-            casaSelecionada = (Casa)casaDataGridView.CurrentRow.DataBoundItem;
-            //Verificar se existe alguma casa ja selecionada
-            if (casaSelecionada != null)
+            var current = casaDataGridView.CurrentRow;
+            if (current != null) // Means that you've not clicked the column header
             {
-                //Carregar as imformaçoes para os respetivos citios
-                lblIdCasa.Text = "ID: " + casaSelecionada.IdCasa;
-                txtRua.Text = casaSelecionada.Andar;
-                txtLocalidade.Text = casaSelecionada.Localidade;
-                txtNumero.Text = casaSelecionada.Numero;
-                txtAndar.Text = casaSelecionada.Andar;
-                nudArea.Value = casaSelecionada.Area;
-                nudAssoalhadas.Value = casaSelecionada.NumeroAssoalhada;
-                nudWC.Value = casaSelecionada.NumeroWC;
-                nudPisos.Value = casaSelecionada.NumerosPisos;
-                cbTipoDeMoradia.Text = casaSelecionada.Tipo;
-                cb_Clientes.Text = casaSelecionada.Proprientario.ToString();   
-                btnGerirLimpezas.Text = "Gerir Limpezas (Total: " + casaSelecionada.Limpezas.Count().ToString() + ")";
-            }  
+                //Para ir buscar a casa que foi selecionada na data grid view
+                casaSelecionada = null;
+                casaSelecionada = (Casa)casaDataGridView.CurrentRow.DataBoundItem;
+                //Verificar se existe alguma casa ja selecionada
+                if (casaSelecionada != null)
+                {
+                    //Carregar as imformaçoes para os respetivos citios
+                    lblIdCasa.Text = "ID: " + casaSelecionada.IdCasa;
+                    txtRua.Text = casaSelecionada.Andar;
+                    txtLocalidade.Text = casaSelecionada.Localidade;
+                    txtNumero.Text = casaSelecionada.Numero;
+                    txtAndar.Text = casaSelecionada.Andar;
+                    nudArea.Value = casaSelecionada.Area;
+                    nudAssoalhadas.Value = casaSelecionada.NumeroAssoalhada;
+                    nudWC.Value = casaSelecionada.NumeroWC;
+                    nudPisos.Value = casaSelecionada.NumerosPisos;
+                    cbTipoDeMoradia.Text = casaSelecionada.Tipo;
+                    cb_Clientes.Text = casaSelecionada.Proprientario.ToString();
+                    btnGerirLimpezas.Text = "Gerir Limpezas (Total: " + casaSelecionada.Limpezas.Count().ToString() + ")";
+                }
+            }
         }
 
         //Funcao para limpar
@@ -204,6 +241,7 @@ namespace Home
             nudWC.Value = 0;
             nudPisos.Value = 0;
             cbTipoDeMoradia.Text = string.Empty;
+            cb_Clientes.Text = string.Empty;
         }
 
         //Quando o butao limpar for precionado
@@ -235,7 +273,8 @@ namespace Home
 
         private void btnRemover_Click(object sender, EventArgs e)
         {
-
+            imobiliaria.Casas.Remove(casaSelecionada);
+            imobiliaria.SaveChanges();
         }
 
         private void btnVerVenda_Click(object sender, EventArgs e)

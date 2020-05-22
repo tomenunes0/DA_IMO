@@ -18,7 +18,6 @@ namespace Projeto_DA
         public System.DateTime DataVenda { get; set; }
         public decimal ValorNegociado { get; set; }
         public decimal ComissaoNegocio { get; set; }
-        public int ClienteIdCliente { get; set; }
     
         public virtual CasaVendavel CasaVendavel { get; set; }
         public virtual Cliente Comprador { get; set; }

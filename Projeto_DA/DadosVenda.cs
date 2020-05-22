@@ -28,6 +28,7 @@ namespace Projeto_DA
             //transferir os dados das variaveis com os dados transportos do form anterior para as locais
             this.imobiliaria = imobiliaria;
             this.casaSelecionada = casaSelecionada;
+            lblProprientario.Text =  "Proprietário: " + casaSelecionada.Proprientario;
         }
 
         private void btnEfetuarVenda_Click(object sender, EventArgs e)

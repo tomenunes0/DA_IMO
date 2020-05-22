@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/20/2020 11:30:59
+-- Date Created: 05/22/2020 19:32:17
 -- Generated from EDMX file: D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\Imobiliriaria_DB.edmx
 -- --------------------------------------------------
 
@@ -136,8 +136,16 @@ CREATE TABLE [dbo].[Vendas] (
     [DataVenda] datetime  NOT NULL,
     [ValorNegociado] decimal(18,0)  NOT NULL,
     [ComissaoNegocio] decimal(18,0)  NOT NULL,
-    [ClienteIdCliente] int  NOT NULL,
-    [CasaVendavel_IdCasa] int  NOT NULL
+    [CasaVendavel_IdCasa] int  NOT NULL,
+    [Comprador_IdCliente] int  NOT NULL
+);
+GO
+
+-- Creating table 'Casas_CasaVendavel'
+CREATE TABLE [dbo].[Casas_CasaVendavel] (
+    [ValorBaseVenda] decimal(18,0)  NOT NULL,
+    [ValorComissao] decimal(18,0)  NOT NULL,
+    [IdCasa] int  NOT NULL
 );
 GO
 
@@ -147,14 +155,6 @@ CREATE TABLE [dbo].[Casas_CasaArrendavel] (
     [Comissao] decimal(18,0)  NOT NULL,
     [IdCasa] int  NOT NULL,
     [Arrendamentos_IdArrendamento] int  NOT NULL
-);
-GO
-
--- Creating table 'Casas_CasaVendavel'
-CREATE TABLE [dbo].[Casas_CasaVendavel] (
-    [ValorBaseVenda] decimal(18,0)  NOT NULL,
-    [ValorComissao] decimal(18,0)  NOT NULL,
-    [IdCasa] int  NOT NULL
 );
 GO
 
@@ -198,15 +198,15 @@ ADD CONSTRAINT [PK_Vendas]
     PRIMARY KEY CLUSTERED ([IdVenda] ASC);
 GO
 
--- Creating primary key on [IdCasa] in table 'Casas_CasaArrendavel'
-ALTER TABLE [dbo].[Casas_CasaArrendavel]
-ADD CONSTRAINT [PK_Casas_CasaArrendavel]
-    PRIMARY KEY CLUSTERED ([IdCasa] ASC);
-GO
-
 -- Creating primary key on [IdCasa] in table 'Casas_CasaVendavel'
 ALTER TABLE [dbo].[Casas_CasaVendavel]
 ADD CONSTRAINT [PK_Casas_CasaVendavel]
+    PRIMARY KEY CLUSTERED ([IdCasa] ASC);
+GO
+
+-- Creating primary key on [IdCasa] in table 'Casas_CasaArrendavel'
+ALTER TABLE [dbo].[Casas_CasaArrendavel]
+ADD CONSTRAINT [PK_Casas_CasaArrendavel]
     PRIMARY KEY CLUSTERED ([IdCasa] ASC);
 GO
 
@@ -227,21 +227,6 @@ GO
 CREATE INDEX [IX_FK_ClienteArrendamento]
 ON [dbo].[Arrendamentos]
     ([Arrendatario_IdCliente]);
-GO
-
--- Creating foreign key on [Arrendamentos_IdArrendamento] in table 'Casas_CasaArrendavel'
-ALTER TABLE [dbo].[Casas_CasaArrendavel]
-ADD CONSTRAINT [FK_ArrendamentoCasaArrendavel]
-    FOREIGN KEY ([Arrendamentos_IdArrendamento])
-    REFERENCES [dbo].[Arrendamentos]
-        ([IdArrendamento])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ArrendamentoCasaArrendavel'
-CREATE INDEX [IX_FK_ArrendamentoCasaArrendavel]
-ON [dbo].[Casas_CasaArrendavel]
-    ([Arrendamentos_IdArrendamento]);
 GO
 
 -- Creating foreign key on [Casa_IdCasa] in table 'Limpezas'
@@ -274,21 +259,6 @@ ON [dbo].[Vendas]
     ([CasaVendavel_IdCasa]);
 GO
 
--- Creating foreign key on [ClienteIdCliente] in table 'Vendas'
-ALTER TABLE [dbo].[Vendas]
-ADD CONSTRAINT [FK_ClienteVenda]
-    FOREIGN KEY ([ClienteIdCliente])
-    REFERENCES [dbo].[Clientes]
-        ([IdCliente])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ClienteVenda'
-CREATE INDEX [IX_FK_ClienteVenda]
-ON [dbo].[Vendas]
-    ([ClienteIdCliente]);
-GO
-
 -- Creating foreign key on [Limpeza_IdLimpeza] in table 'Servicos'
 ALTER TABLE [dbo].[Servicos]
 ADD CONSTRAINT [FK_ServicoLimpeza]
@@ -319,18 +289,48 @@ ON [dbo].[Casas]
     ([Proprientario_IdCliente]);
 GO
 
--- Creating foreign key on [IdCasa] in table 'Casas_CasaArrendavel'
+-- Creating foreign key on [Comprador_IdCliente] in table 'Vendas'
+ALTER TABLE [dbo].[Vendas]
+ADD CONSTRAINT [FK_ClienteVenda]
+    FOREIGN KEY ([Comprador_IdCliente])
+    REFERENCES [dbo].[Clientes]
+        ([IdCliente])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ClienteVenda'
+CREATE INDEX [IX_FK_ClienteVenda]
+ON [dbo].[Vendas]
+    ([Comprador_IdCliente]);
+GO
+
+-- Creating foreign key on [Arrendamentos_IdArrendamento] in table 'Casas_CasaArrendavel'
 ALTER TABLE [dbo].[Casas_CasaArrendavel]
-ADD CONSTRAINT [FK_CasaArrendavel_inherits_Casa]
+ADD CONSTRAINT [FK_ArrendamentoCasaArrendavel]
+    FOREIGN KEY ([Arrendamentos_IdArrendamento])
+    REFERENCES [dbo].[Arrendamentos]
+        ([IdArrendamento])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ArrendamentoCasaArrendavel'
+CREATE INDEX [IX_FK_ArrendamentoCasaArrendavel]
+ON [dbo].[Casas_CasaArrendavel]
+    ([Arrendamentos_IdArrendamento]);
+GO
+
+-- Creating foreign key on [IdCasa] in table 'Casas_CasaVendavel'
+ALTER TABLE [dbo].[Casas_CasaVendavel]
+ADD CONSTRAINT [FK_CasaVendavel_inherits_Casa]
     FOREIGN KEY ([IdCasa])
     REFERENCES [dbo].[Casas]
         ([IdCasa])
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [IdCasa] in table 'Casas_CasaVendavel'
-ALTER TABLE [dbo].[Casas_CasaVendavel]
-ADD CONSTRAINT [FK_CasaVendavel_inherits_Casa]
+-- Creating foreign key on [IdCasa] in table 'Casas_CasaArrendavel'
+ALTER TABLE [dbo].[Casas_CasaArrendavel]
+ADD CONSTRAINT [FK_CasaArrendavel_inherits_Casa]
     FOREIGN KEY ([IdCasa])
     REFERENCES [dbo].[Casas]
         ([IdCasa])

@@ -37,18 +37,18 @@
           <ScalarProperty Name="Tipo" ColumnName="Tipo" />
         </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(masterModel.CasaArrendavel)">
-        <MappingFragment StoreEntitySet="Casas_CasaArrendavel">
-          <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
-          <ScalarProperty Name="ValorBaseMes" ColumnName="ValorBaseMes" />
-          <ScalarProperty Name="Comissao" ColumnName="Comissao" />
-        </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(masterModel.CasaVendavel)">
         <MappingFragment StoreEntitySet="Casas_CasaVendavel">
           <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
           <ScalarProperty Name="ValorBaseVenda" ColumnName="ValorBaseVenda" />
           <ScalarProperty Name="ValorComissao" ColumnName="ValorComissao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(masterModel.CasaArrendavel)">
+        <MappingFragment StoreEntitySet="Casas_CasaArrendavel">
+          <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
+          <ScalarProperty Name="ValorBaseMes" ColumnName="ValorBaseMes" />
+          <ScalarProperty Name="Comissao" ColumnName="Comissao" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -77,7 +77,6 @@
           <ScalarProperty Name="DataVenda" ColumnName="DataVenda" />
           <ScalarProperty Name="ValorNegociado" ColumnName="ValorNegociado" />
           <ScalarProperty Name="ComissaoNegocio" ColumnName="ComissaoNegocio" />
-          <ScalarProperty Name="ClienteIdCliente" ColumnName="ClienteIdCliente" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -87,14 +86,6 @@
       </EndProperty>
       <EndProperty Name="Arrendamento">
         <ScalarProperty Name="IdArrendamento" ColumnName="IdArrendamento" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="ArrendamentoCasaArrendavel" TypeName="masterModel.ArrendamentoCasaArrendavel" StoreEntitySet="Casas_CasaArrendavel">
-      <EndProperty Name="Arrendamento">
-        <ScalarProperty Name="IdArrendamento" ColumnName="Arrendamentos_IdArrendamento" />
-      </EndProperty>
-      <EndProperty Name="CasaArrendavel">
-        <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="LimpezaCasa" TypeName="masterModel.LimpezaCasa" StoreEntitySet="Limpezas">
@@ -128,6 +119,22 @@
         <ScalarProperty Name="IdCliente" ColumnName="Proprientario_IdCliente" />
       </EndProperty>
       <EndProperty Name="Casa">
+        <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClienteVenda" TypeName="masterModel.ClienteVenda" StoreEntitySet="Vendas">
+      <EndProperty Name="Cliente">
+        <ScalarProperty Name="IdCliente" ColumnName="Comprador_IdCliente" />
+      </EndProperty>
+      <EndProperty Name="Venda">
+        <ScalarProperty Name="IdVenda" ColumnName="IdVenda" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ArrendamentoCasaArrendavel" TypeName="masterModel.ArrendamentoCasaArrendavel" StoreEntitySet="Casas_CasaArrendavel">
+      <EndProperty Name="Arrendamento">
+        <ScalarProperty Name="IdArrendamento" ColumnName="Arrendamentos_IdArrendamento" />
+      </EndProperty>
+      <EndProperty Name="CasaArrendavel">
         <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
       </EndProperty>
     </AssociationSetMapping>

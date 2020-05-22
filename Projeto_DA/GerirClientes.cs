@@ -21,6 +21,8 @@ namespace Home
         //Novo cliente
         private bool novo = false;
 
+        private bool sortAscending = false;
+
         //Inicio do form 2 
         public GerirClientes()
         {
@@ -77,25 +79,30 @@ namespace Home
         //Funcao executa quando a selecao da data grid view muda
         private void clienteDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            //Para ir buscar o cliente que foi selecionado
-            clienteSelecionado = (Cliente)clienteDataGridView.CurrentRow.DataBoundItem;
-            if (clienteSelecionado != null)
+            var current = clienteDataGridView.CurrentRow;
+            if (current != null) // Means that you've not clicked the column header
             {
-                //Mete os dados no seu citio de acordo com o cliente selecionado
-                txtNome.Text = clienteSelecionado.Nome;
-                txtNif.Text = clienteSelecionado.Nif;
-                txtMorada.Text = clienteSelecionado.Morada;
-                txtContacto.Text = clienteSelecionado.Contacto;
-                //Bloquear Butao novo
-                btnNovo.Enabled = false;
-                //Desbloquear butao
-                btnRemover.Enabled = true;
-                novo = false;
+                //Para ir buscar o cliente que foi selecionado
+                clienteSelecionado = (Cliente)clienteDataGridView.CurrentRow.DataBoundItem;
+                if (clienteSelecionado != null)
+                {
+                    //Mete os dados no seu citio de acordo com o cliente selecionado
+                    txtNome.Text = clienteSelecionado.Nome;
+                    txtNif.Text = clienteSelecionado.Nif;
+                    txtMorada.Text = clienteSelecionado.Morada;
+                    txtContacto.Text = clienteSelecionado.Contacto;
+                    //Bloquear Butao novo
+                    btnNovo.Enabled = false;
+                    //Desbloquear butao
+                    btnRemover.Enabled = true;
+                    novo = false;
+                }
+                //Chamar a funcao para atualizar as lista das casas
+                atualiza_Casas();
+                atualizar_Arrendamentos();
+                atualizar_Aquisicoes();
             }
-            //Chamar a funcao para atualizar as lista das casas
-            atualiza_Casas();
-            atualizar_Arrendamentos();
-            atualizar_Aquisicoes();
+           
 
         }
 
@@ -200,7 +207,7 @@ namespace Home
             if (result == DialogResult.Yes)
             {
                 //Verificar se o cliente tem ou nao casas associadas
-                if (clienteSelecionado.Casas.ToList<Casa>() == null)
+                if (clienteSelecionado.Casas.Count() == 0)
                 {
                     //Chamar a funcao para eliminar os clientes
                     eliminiar_Clientes();
@@ -336,6 +343,5 @@ namespace Home
                 lb_Aquisicoes.DataSource = clienteSelecionado.Aquisicoes.ToList<Venda>();
             }
         }
-
     }
 }
