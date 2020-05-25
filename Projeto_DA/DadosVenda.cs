@@ -15,25 +15,48 @@ namespace Projeto_DA
         //perparar o container para a base de dados
         private masterEntities imobiliaria;
         //Perparar a variaver para a casa selecionada
-        private Casa casaSelecionada;
+        private CasaVendavel casaVendavelSelecionada;
         //Perparar a variavel para a limpeza selecionada
         private Limpeza limpezaSelecionada;
         //Perparar a variavel para o servico selecionado
         private Servico servicoSelecionado;
+        private Cliente clienteSelecionado;
 
-        public DadosVenda(Casa casaSelecionada, string arrenvendavel, masterEntities imobiliaria)
+        public DadosVenda(CasaVendavel casaVendavelSelecionada, masterEntities imobiliaria)
         {
             //Inicia os componentes basicos do form
             InitializeComponent();
             //transferir os dados das variaveis com os dados transportos do form anterior para as locais
             this.imobiliaria = imobiliaria;
-            this.casaSelecionada = casaSelecionada;
-            lblProprientario.Text =  "Proprietário: " + casaSelecionada.Proprientario;
+            this.casaVendavelSelecionada = casaVendavelSelecionada;
+            lblProprientario.Text = "Proprietário: " + casaVendavelSelecionada.Proprientario;
+            /* if (casaVendavelSelecionada.Venda.Comprador.Casas.Count() == 0)
+                 lblDisponibilidade.Text = "Estado: Disponivel";
+             else
+                 lblDisponibilidade.Text = "Estado: Não Disponivel";*/
+            lblValorBase.Text = " Valor Base: " + casaVendavelSelecionada.ValorBaseVenda + "€";
+            lblComissaoBase.Text = "Comissão Base " + casaVendavelSelecionada.ValorComissao + "€";
+            //Adicionar os clientes da base de dados na combo box
+            cbComparador.DataSource = imobiliaria.Clientes.ToList<Cliente>();
+            cbComparador.Text = "";
         }
 
         private void btnEfetuarVenda_Click(object sender, EventArgs e)
         {
+            Venda vendaTemp = new Venda();
+            vendaTemp.DataVenda = dtpDataVenda.Value;
+            vendaTemp.ValorNegociado = Convert.ToDecimal(txtValorNegociado.Text);
+            vendaTemp.ComissaoNegocio = Convert.ToDecimal(txtValorDaComissao.Text);
+            clienteSelecionado.Aquisicoes.Add(vendaTemp);
+            imobiliaria.SaveChanges();
+        }
 
+        private void cbComparador_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Marcar o cliente selecionado para null
+            clienteSelecionado = null;
+            //Carregar o cliente selecionado da text box para a variavel
+            clienteSelecionado = (Cliente)cbComparador.SelectedItem;
         }
     }
 }

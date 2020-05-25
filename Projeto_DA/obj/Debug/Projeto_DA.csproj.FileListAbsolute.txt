@@ -138,3 +138,4 @@ D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\bin\Debug\Sy
 D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\bin\Debug\System.Text.Encodings.Web.xml
 D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\WORKS\ESTG-PSI\Desenvolvimento de Aplicações\DA_IMO\Projeto_DA\obj\Debug\Projeto_DA.GerirArrendamentos.resources

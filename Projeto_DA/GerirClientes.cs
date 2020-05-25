@@ -21,8 +21,6 @@ namespace Home
         //Novo cliente
         private bool novo = false;
 
-        private bool sortAscending = false;
-
         //Inicio do form 2 
         public GerirClientes()
         {

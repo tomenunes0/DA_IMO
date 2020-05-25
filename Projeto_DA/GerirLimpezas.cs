@@ -87,7 +87,7 @@ namespace Projeto_DA
         {
             //Fazer nova limpeza
             Limpeza limpezaTemp = new Limpeza();
-            limpezaTemp.Data = DateTime.Now;
+            limpezaTemp.Data = dtpDataDaLimpeza.Value;
             //adcionar limpeza a base de dados a casa selecionada
             casaSelecionada.Limpezas.Add(limpezaTemp);
             //Guarda a imformaçao para a text box

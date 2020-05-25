@@ -36,12 +36,12 @@
             this.lblDisponibilidade = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnEfetuarVenda = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbComparador = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.txtValorDaComissao = new System.Windows.Forms.TextBox();
+            this.txtValorNegociado = new System.Windows.Forms.TextBox();
+            this.dtpDataVenda = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -105,12 +105,12 @@
             // 
             this.groupBox2.BackColor = System.Drawing.Color.White;
             this.groupBox2.Controls.Add(this.btnEfetuarVenda);
-            this.groupBox2.Controls.Add(this.comboBox1);
+            this.groupBox2.Controls.Add(this.cbComparador);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Controls.Add(this.dateTimePicker1);
+            this.groupBox2.Controls.Add(this.txtValorDaComissao);
+            this.groupBox2.Controls.Add(this.txtValorNegociado);
+            this.groupBox2.Controls.Add(this.dtpDataVenda);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label7);
@@ -141,13 +141,14 @@
             this.btnEfetuarVenda.UseVisualStyleBackColor = false;
             this.btnEfetuarVenda.Click += new System.EventHandler(this.btnEfetuarVenda_Click);
             // 
-            // comboBox1
+            // cbComparador
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(135, 137);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(407, 32);
-            this.comboBox1.TabIndex = 9;
+            this.cbComparador.FormattingEnabled = true;
+            this.cbComparador.Location = new System.Drawing.Point(135, 137);
+            this.cbComparador.Name = "cbComparador";
+            this.cbComparador.Size = new System.Drawing.Size(407, 32);
+            this.cbComparador.TabIndex = 9;
+            this.cbComparador.SelectedIndexChanged += new System.EventHandler(this.cbComparador_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -167,26 +168,26 @@
             this.label9.TabIndex = 7;
             this.label9.Text = "€";
             // 
-            // textBox2
+            // txtValorDaComissao
             // 
-            this.textBox2.Location = new System.Drawing.Point(208, 103);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(307, 30);
-            this.textBox2.TabIndex = 6;
+            this.txtValorDaComissao.Location = new System.Drawing.Point(208, 103);
+            this.txtValorDaComissao.Name = "txtValorDaComissao";
+            this.txtValorDaComissao.Size = new System.Drawing.Size(307, 30);
+            this.txtValorDaComissao.TabIndex = 6;
             // 
-            // textBox1
+            // txtValorNegociado
             // 
-            this.textBox1.Location = new System.Drawing.Point(179, 68);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(336, 30);
-            this.textBox1.TabIndex = 5;
+            this.txtValorNegociado.Location = new System.Drawing.Point(179, 68);
+            this.txtValorNegociado.Name = "txtValorNegociado";
+            this.txtValorNegociado.Size = new System.Drawing.Size(336, 30);
+            this.txtValorNegociado.TabIndex = 5;
             // 
-            // dateTimePicker1
+            // dtpDataVenda
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(163, 32);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(381, 30);
-            this.dateTimePicker1.TabIndex = 4;
+            this.dtpDataVenda.Location = new System.Drawing.Point(163, 32);
+            this.dtpDataVenda.Name = "dtpDataVenda";
+            this.dtpDataVenda.Size = new System.Drawing.Size(381, 30);
+            this.dtpDataVenda.TabIndex = 4;
             // 
             // label5
             // 
@@ -253,12 +254,12 @@
         private System.Windows.Forms.Label lblProprientario;
         private System.Windows.Forms.Label lblDisponibilidade;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbComparador;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TextBox txtValorDaComissao;
+        private System.Windows.Forms.TextBox txtValorNegociado;
+        private System.Windows.Forms.DateTimePicker dtpDataVenda;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
