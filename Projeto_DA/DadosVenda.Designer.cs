@@ -52,7 +52,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.groupBox1.Controls.Add(this.lblComissaoBase);
             this.groupBox1.Controls.Add(this.lblValorBase);
             this.groupBox1.Controls.Add(this.lblProprientario);
