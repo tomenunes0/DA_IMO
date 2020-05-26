@@ -1,9 +1,9 @@
 # Projeto de Metodologias de Desenvolvimento de Software: DA/IMO
 
 **Nome do Estudante: Alexandre Bertolo**\
-`2190754`
+`2190754`\
 **Nome do Estudante: João Patrocinio**\
-`2190740`
+`2190740`\
 **Nome do Estudante: Tomé Nunes**\
 `2190755`
 
