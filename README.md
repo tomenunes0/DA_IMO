@@ -16,6 +16,6 @@ Na gerência de limpezas é definido uma data de começo, a duração e o arrend
 + Agendar Limpezas;
 + Gerir arrendamentos;
 + Gerir Vendas
-> Metedologias de Desenvolvimento de Software @ 2020
+> Metedologias de Desenvolvimento de Software @ 2020`
 
 ![](https://www.ipleiria.pt/wp-content/themes/ipleiria/img/logo_ipl_header.png)
