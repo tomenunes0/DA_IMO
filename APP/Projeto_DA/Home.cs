@@ -20,23 +20,25 @@ namespace Home
         //Quando o butao de gerir cliente eh percionado
         private void pbGerirClientes_Click(object sender, EventArgs e)
         {
+            this.Hide();
             //Perpara o Form 3 para ser executado
             GerirClientes frm = new GerirClientes();
             //Mostra o GerirCasas 
-            frm.Show();
+            frm.ShowDialog();
             //Esconde o form 1 para este nao ser mostrado
-            this.Hide();
+            this.Close();
         }
 
         //Quando o butao de gerir casa eh percionado
         private void pbGerirCasas_Click(object sender, EventArgs e)
         {
+            this.Hide();
             //Perpara o Form 2 para ser executado
             GerirCasas frm = new GerirCasas();
             //Mostra o GerirClientes 
-            frm.Show();
+            frm.ShowDialog();
             //Esconde o GerirClientes para este nao ser mostrado
-            this.Hide();
+            this.Close();
         }
 
         //Timer para atualizar a data e hora do form 1 

@@ -120,12 +120,18 @@ namespace Projeto_DA
         //Quando o butao remover for persionado 
         private void btnRemover_Click(object sender, EventArgs e)
         {
-            //Remover da casa selecionada a limpeza
-            casaSelecionada.Limpezas.Remove(limpezaSelecionada);
-            //Guarda a imformaçao para a text box
-            imobiliaria.SaveChanges();
-            //Chamar a funcao para atualizar a lista de limpezas
-            atualizar_ListaLimpezas();
+            //Dialogo de messagem para perguntar se o deseja mesmo fechar o programa ou nao 
+            DialogResult result = MessageBox.Show("Deseja remover esta limpeza?", "Remover Limpeza?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            //Verifica qual foi a opecao escolhida e se for a opcao nao este ira entrar no if 
+            if (result == DialogResult.Yes)
+            {
+                //Remover da casa selecionada a limpeza
+                casaSelecionada.Limpezas.Remove(limpezaSelecionada);
+                //Guarda a imformaçao para a text box
+                imobiliaria.SaveChanges();
+                //Chamar a funcao para atualizar a lista de limpezas
+                atualizar_ListaLimpezas();
+            }   
         }
 
         //Quando a lista de limpezas for clicada / quando o index da lista for alterado

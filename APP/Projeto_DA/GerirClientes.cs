@@ -49,12 +49,13 @@ namespace Home
         //Quando o este form for fechado
         private void GerirClientes_FormClosed(object sender, FormClosedEventArgs e)
         {
+            this.Hide();
             //Perparar para abrir o form 1 
             Home frm = new Home();
             //Mostar o form 1
-            frm.Show();
+            frm.ShowDialog();
             //Fechar o form 
-            this.Hide();
+            this.Close();
         }
 
         //Quando o botao de save for precionado esta funcao sera ativada
@@ -77,7 +78,7 @@ namespace Home
         //Funcao executa quando a selecao da data grid view muda
         private void clienteDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            var current = clienteDataGridView.CurrentRow;
+            DataGridViewRow current = clienteDataGridView.CurrentRow;
             if (current != null) // Means that you've not clicked the column header
             {
                 //Para ir buscar o cliente que foi selecionado

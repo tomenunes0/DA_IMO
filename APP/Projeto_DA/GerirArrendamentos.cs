@@ -38,16 +38,23 @@ namespace Projeto_DA
 
         private void btnRemover_Click(object sender, EventArgs e)
         {
-            //arrendamentoSelecionado.Arrendatario = null;
-            //arrendamentoSelecionado.CasaArrendavel = null;
-            imobiliaria.SaveChanges();
+            //Dialogo de messagem para perguntar se o deseja mesmo fechar o programa ou nao 
+            DialogResult result = MessageBox.Show("Deseja cancelar este arrendamento?", "Cancelar Arrendamento?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            //Verifica qual foi a opecao escolhida e se for a opcao nao este ira entrar no if 
+            if (result == DialogResult.Yes)
+            {
+                //arrendamentoSelecionado.Arrendatario = null;
+                //arrendamentoSelecionado.CasaArrendavel = null;
+                imobiliaria.SaveChanges();
 
-            //clienteSelecionado.Arrendamentos.Remove(arrendamentoSelecionado);
-            //casaArrendavelSelecionada.Arrendamentos.Remove(arrendamentoSelecionado);
-            imobiliaria.Arrendamentos.Remove(arrendamentoSelecionado);
+                //clienteSelecionado.Arrendamentos.Remove(arrendamentoSelecionado);
+                //casaArrendavelSelecionada.Arrendamentos.Remove(arrendamentoSelecionado);
+                imobiliaria.Arrendamentos.Remove(arrendamentoSelecionado);
 
-            imobiliaria.SaveChanges();
-            atualizar_Lista();
+                imobiliaria.SaveChanges();
+                atualizar_Lista();
+                limpar_campos();
+            }
         }
 
         private void cbArrendatario_SelectedIndexChanged(object sender, EventArgs e)
@@ -60,21 +67,27 @@ namespace Projeto_DA
 
         private void btnNovoArrendamento_Click(object sender, EventArgs e)
         {
-            Arrendamento arrendamentoTemp = new Arrendamento();
-            arrendamentoTemp.InicioContrado = dtpInicioDoContrato.Value;
-            arrendamentoTemp.DuracaoMeses = Convert.ToInt32(nudDuracaoMeses.Value);
-            arrendamentoTemp.Arrendatario = clienteSelecionado;
-            if (chkRenovavel.Checked == true)
-                arrendamentoTemp.Renovavel = "Sim";
+            if (verificaoes() == true)
+            {
+                Arrendamento arrendamentoTemp = new Arrendamento();
+                arrendamentoTemp.InicioContrado = dtpInicioDoContrato.Value;
+                arrendamentoTemp.DuracaoMeses = Convert.ToInt32(nudDuracaoMeses.Value);
+                arrendamentoTemp.Arrendatario = clienteSelecionado;
+                if (chkRenovavel.Checked == true)
+                    arrendamentoTemp.Renovavel = "Sim";
+                else
+                    arrendamentoTemp.Renovavel = "Não";
+
+
+                //lienteSelecionado.Arrendamentos.Add(arrendamentoTemp);
+                casaArrendavelSelecionada.Arrendamentos.Add(arrendamentoTemp);
+
+                imobiliaria.SaveChanges();
+                atualizar_Lista();
+            }
             else
-                arrendamentoTemp.Renovavel = "Não";
+                MessageBox.Show("Porfavor Verifique os campos e tente novamente!", "Adicionar Arrendamento?", MessageBoxButtons.OK, MessageBoxIcon.Information) ;
 
-
-            //lienteSelecionado.Arrendamentos.Add(arrendamentoTemp);
-            casaArrendavelSelecionada.Arrendamentos.Add(arrendamentoTemp);
-
-            imobiliaria.SaveChanges();
-            atualizar_Lista();
         }
 
         private void atualizar_Lista()
@@ -125,6 +138,14 @@ namespace Projeto_DA
             }
             else
                 btnRemover.Enabled = false;
+        }
+
+        private bool verificaoes()
+        {
+            bool state = true;
+            if (nudDuracaoMeses.Value == 0)
+                state = false;
+            return state;
         }
     }
 }

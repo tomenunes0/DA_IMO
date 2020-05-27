@@ -16,7 +16,7 @@ namespace Projeto_DA
         private masterEntities imobiliaria;
         //Perparar a variaver para a casa selecionada
         private CasaVendavel casaVendavelSelecionada;
-   
+
         private Cliente clienteSelecionado;
 
         public DadosVenda(CasaVendavel casaVendavelSelecionada, masterEntities imobiliaria)
@@ -39,15 +39,20 @@ namespace Projeto_DA
         }
 
         private void btnEfetuarVenda_Click(object sender, EventArgs e)
-        { 
-            Venda vendaTemp = new Venda();
-            vendaTemp.DataVenda = dtpDataVenda.Value;
-            vendaTemp.ValorNegociado = Convert.ToDecimal(txtValorNegociado.Text);
-            vendaTemp.ComissaoNegocio = Convert.ToDecimal(txtValorDaComissao.Text);
-            vendaTemp.CasaVendavel = casaVendavelSelecionada;
-            clienteSelecionado.Aquisicoes.Add(vendaTemp);
-            imobiliaria.SaveChanges();
-            MessageBox.Show("Acabou de Comprar esta casa Obrigado pela Compra!","Comprar",MessageBoxButtons.OK,MessageBoxIcon.Information);
+        {
+            if (verificacoes() == true)
+            {
+                Venda vendaTemp = new Venda();
+                vendaTemp.DataVenda = dtpDataVenda.Value;
+                vendaTemp.ValorNegociado = Convert.ToDecimal(txtValorNegociado.Text);
+                vendaTemp.ComissaoNegocio = Convert.ToDecimal(txtValorDaComissao.Text);
+                vendaTemp.CasaVendavel = casaVendavelSelecionada;
+                clienteSelecionado.Aquisicoes.Add(vendaTemp);
+                imobiliaria.SaveChanges();
+                MessageBox.Show("Acabou de Comprar esta casa Obrigado pela Compra!", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+                MessageBox.Show("Porfavor verifique os campos de entrada e tente novamente", "Compra de Casa?", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void cbComparador_SelectedIndexChanged(object sender, EventArgs e)
@@ -56,6 +61,16 @@ namespace Projeto_DA
             clienteSelecionado = null;
             //Carregar o cliente selecionado da text box para a variavel
             clienteSelecionado = (Cliente)cbComparador.SelectedItem;
+        }
+
+        private bool verificacoes()
+        {
+            bool state = true;
+            if (txtValorNegociado.Text == string.Empty)
+                state = false;
+            else if (txtValorDaComissao.Text == string.Empty)
+                state = false;
+            return state;
         }
     }
 }
