@@ -234,6 +234,7 @@ namespace Home
                         //Verificar se existe alguma casa ja selecionada
                         if (casaVendavelSelecionada != null)
                         {
+                            limpar_Campos();
                             //Carregar as imformaçoes para os respetivos citios
                             lblIdCasa.Text = "ID: " + casaVendavelSelecionada.IdCasa;
                             txtRua.Text = casaVendavelSelecionada.Andar;
@@ -255,15 +256,50 @@ namespace Home
                             chkVendavel.Enabled = false;
                             chkArrendavel.Enabled = false;
                             btnNovo.Enabled = false;
+                            btnVerCriarArrendamento.Enabled = false;
                             //Ativar o butao para guardar
                             btnGuardar.Enabled = true;
+                            btnVerVenda.Enabled = true;
+                            btnGerirLimpezas.Enabled = true;
                             novo = false;
                         }
                     }
 
                     if (casaSelecionada is CasaArrendavel)
                     {
-                        MessageBox.Show("Nao tens pila");
+                        casaArrendavelSelecionada = (CasaArrendavel)casaDataGridView.CurrentRow.DataBoundItem;
+                        //Verificar se existe alguma casa ja selecionada
+                        if (casaArrendavelSelecionada != null)
+                        {
+                            limpar_Campos();
+                            //Carregar as imformaçoes para os respetivos citios
+                            lblIdCasa.Text = "ID: " + casaArrendavelSelecionada.IdCasa;
+                            txtRua.Text = casaArrendavelSelecionada.Andar;
+                            txtLocalidade.Text = casaArrendavelSelecionada.Localidade;
+                            txtNumero.Text = casaArrendavelSelecionada.Numero;
+                            txtAndar.Text = casaArrendavelSelecionada.Andar;
+                            nudArea.Value = casaArrendavelSelecionada.Area;
+                            nudAssoalhadas.Value = casaArrendavelSelecionada.NumeroAssoalhada;
+                            nudWC.Value = casaArrendavelSelecionada.NumeroWC;
+                            nudPisos.Value = casaArrendavelSelecionada.NumerosPisos;
+                            cbTipoDeMoradia.Text = casaArrendavelSelecionada.Tipo;
+                            cb_Clientes.Text = casaArrendavelSelecionada.Proprientario.ToString();
+                            txtValorBaseNegociavel.Text = string.Empty;
+                            txtArrendavelComissao.Text = Convert.ToString(casaArrendavelSelecionada.Comissao);
+                            txtArrendavelValorBase.Text = Convert.ToString(casaArrendavelSelecionada.ValorBaseMes);
+                            btnGerirLimpezas.Text = "Gerir Limpezas (Total: " + casaArrendavelSelecionada.Limpezas.Count().ToString() + ")";
+                            chkArrendavel.Checked = true;
+                            //Desativar os butoes e chk boxs
+                            chkVendavel.Enabled = false;
+                            chkArrendavel.Enabled = false;
+                            btnNovo.Enabled = false;
+                            btnVerVenda.Enabled = false;
+                            //Ativar o butao para guardar
+                            btnGuardar.Enabled = true;
+                            btnGerirLimpezas.Enabled = true;
+                            btnVerCriarArrendamento.Enabled = true;
+                            novo = false;
+                        }
                     }
                 }
             }
@@ -272,8 +308,6 @@ namespace Home
         //Funcao para limpar
         private void limpar_Campos()
         {
-            //Atualizar a lista dos clientes sem nenhuma excecao
-            atualizarListaCasas();
             //Meter o cliente selecionado a null
             clienteSelecionado = null;
             //Adicionar os clientes da base de dados na combo box
@@ -302,6 +336,9 @@ namespace Home
             gbDadosArrendamento.Enabled = true;
             gbDadosVenda.Enabled = true;
             btnGuardar.Enabled = false;
+            btnVerCriarArrendamento.Enabled = false;
+            btnVerVenda.Enabled = false;
+            btnGerirLimpezas.Enabled = false;
             novo = true;
         }
 
@@ -343,13 +380,37 @@ namespace Home
             //Verifica qual foi a opecao escolhida e se for a opcao nao este ira entrar no if 
             if (result == DialogResult.Yes)
             {
-                //Chamar a funcao para eliminar os clientes
-                imobiliaria.Casas.Remove(casaSelecionada);
-                imobiliaria.SaveChanges();
-                //Chamar a funcao para atualizar a lista dos clientes
-                atualizarListaCasas();
+                if (casaSelecionada is CasaArrendavel)
+                {
+                    if (casaArrendavelSelecionada.Arrendamentos.Count() == 0)
+                    {
+                        //Chamar a funcao para eliminar os clientes
+                        imobiliaria.Casas.Remove(casaArrendavelSelecionada);
+                        imobiliaria.SaveChanges();
+                        //Chamar a funcao para atualizar a lista dos clientes
+                        atualizarListaCasas();
+                    }
+                }
+                else
+                {
+                    if (casaVendavelSelecionada.Venda  !=  null)
+                    {
+                        //Chamar a funcao para eliminar os clientes
+                        imobiliaria.Vendas.Remove(casaVendavelSelecionada.Venda);
+                        imobiliaria.Casas.Remove(casaVendavelSelecionada);
+                        imobiliaria.SaveChanges();
+                        //Chamar a funcao para atualizar a lista dos clientes
+                        atualizarListaCasas();
+                    }
+                    else
+                    {
+                        imobiliaria.Casas.Remove(casaVendavelSelecionada);
+                        imobiliaria.SaveChanges();
+                        //Chamar a funcao para atualizar a lista dos clientes
+                        atualizarListaCasas();
+                    }
+                }    
             }
-
         }
 
         private void btnVerVenda_Click(object sender, EventArgs e)

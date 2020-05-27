@@ -15,8 +15,8 @@ namespace Projeto_DA
     public partial class Arrendamento
     {
         public int IdArrendamento { get; set; }
-        public string InicioContrado { get; set; }
-        public System.DateTime DuracaoMeses { get; set; }
+        public System.DateTime InicioContrado { get; set; }
+        public int DuracaoMeses { get; set; }
         public string Renovavel { get; set; }
     
         public virtual Cliente Arrendatario { get; set; }

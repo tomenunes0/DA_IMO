@@ -66,10 +66,11 @@
       <PropertyRef Name="IdArrendamento" />
     </Key>
     <Property Name="IdArrendamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="InicioContrado" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DuracaoMeses" Type="datetime" Nullable="false" />
+    <Property Name="InicioContrado" Type="datetime" Nullable="false" />
+    <Property Name="DuracaoMeses" Type="int" Nullable="false" />
     <Property Name="Renovavel" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Arrendatario_IdCliente" Type="int" Nullable="false" />
+    <Property Name="CasaArrendavel_IdCasa" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Casas">
     <Key>
@@ -131,7 +132,6 @@
     <Property Name="ValorBaseMes" Type="decimal" Nullable="false" />
     <Property Name="Comissao" Type="decimal" Nullable="false" />
     <Property Name="IdCasa" Type="int" Nullable="false" />
-    <Property Name="Arrendamentos_IdArrendamento" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="ClienteArrendamento">
     <End Role="Cliente" Type="masterModel.Store.Clientes" Multiplicity="1" />
@@ -208,14 +208,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ArrendamentoCasaArrendavel">
-    <End Role="Arrendamento" Type="masterModel.Store.Arrendamentos" Multiplicity="1" />
-    <End Role="CasaArrendavel" Type="masterModel.Store.Casas_CasaArrendavel" Multiplicity="*" />
+    <End Role="Arrendamento" Type="masterModel.Store.Arrendamentos" Multiplicity="*" />
+    <End Role="CasaArrendavel" Type="masterModel.Store.Casas_CasaArrendavel" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="Arrendamento">
-        <PropertyRef Name="IdArrendamento" />
+      <Principal Role="CasaArrendavel">
+        <PropertyRef Name="IdCasa" />
       </Principal>
-      <Dependent Role="CasaArrendavel">
-        <PropertyRef Name="Arrendamentos_IdArrendamento" />
+      <Dependent Role="Arrendamento">
+        <PropertyRef Name="CasaArrendavel_IdCasa" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -305,8 +305,8 @@
             <PropertyRef Name="IdArrendamento" />
           </Key>
           <Property Name="IdArrendamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="InicioContrado" Type="String" Nullable="false" />
-          <Property Name="DuracaoMeses" Type="DateTime" Nullable="false" />
+          <Property Name="InicioContrado" Type="DateTime" Nullable="false" />
+          <Property Name="DuracaoMeses" Type="Int32" Nullable="false" />
           <Property Name="Renovavel" Type="String" Nullable="false" />
           <NavigationProperty Name="Arrendatario" Relationship="masterModel.ClienteArrendamento" FromRole="Arrendamento" ToRole="Cliente" />
           <NavigationProperty Name="CasaArrendavel" Relationship="masterModel.ArrendamentoCasaArrendavel" FromRole="Arrendamento" ToRole="CasaArrendavel" />
@@ -396,7 +396,7 @@
           <End Type="masterModel.Venda" Role="Venda" Multiplicity="*" />
         </Association>
         <Association Name="ArrendamentoCasaArrendavel">
-          <End Type="masterModel.Arrendamento" Role="Arrendamento" Multiplicity="1" />
+          <End Type="masterModel.Arrendamento" Role="Arrendamento" Multiplicity="*" />
           <End Type="masterModel.CasaArrendavel" Role="CasaArrendavel" Multiplicity="0..1" />
         </Association>
       </Schema>
@@ -534,13 +534,14 @@
         <ScalarProperty Name="IdVenda" ColumnName="IdVenda" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="ArrendamentoCasaArrendavel" TypeName="masterModel.ArrendamentoCasaArrendavel" StoreEntitySet="Casas_CasaArrendavel">
-      <EndProperty Name="Arrendamento">
-        <ScalarProperty Name="IdArrendamento" ColumnName="Arrendamentos_IdArrendamento" />
-      </EndProperty>
+    <AssociationSetMapping Name="ArrendamentoCasaArrendavel" TypeName="masterModel.ArrendamentoCasaArrendavel" StoreEntitySet="Arrendamentos">
       <EndProperty Name="CasaArrendavel">
-        <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
+        <ScalarProperty Name="IdCasa" ColumnName="CasaArrendavel_IdCasa" />
       </EndProperty>
+      <EndProperty Name="Arrendamento">
+        <ScalarProperty Name="IdArrendamento" ColumnName="IdArrendamento" />
+      </EndProperty>
+      <Condition ColumnName="CasaArrendavel_IdCasa" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>

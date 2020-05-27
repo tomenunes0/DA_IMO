@@ -205,7 +205,7 @@ namespace Home
             if (result == DialogResult.Yes)
             {
                 //Verificar se o cliente tem ou nao casas associadas
-                if (clienteSelecionado.Casas.Count() == 0)
+                if (clienteSelecionado.Casas.Count() == 0 && clienteSelecionado.Aquisicoes.Count() == 0 && clienteSelecionado.Arrendamentos.Count() == 0)
                 {
                     //Chamar a funcao para eliminar os clientes
                     eliminiar_Clientes();
@@ -213,7 +213,7 @@ namespace Home
                     atualizarListaClientes();
                 }
                 else
-                    MessageBox.Show("O cliente tem casas nao pode eliminar o cliente! Sem eleminar as casas primeiro!", "Eliminar Clientes?", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("O cliente ainda tem casas ou aquisicoes ou arrendamentos por eliminar!\nTem que eleminar tudo primeiro!\nSó depois é que pode eleminar o cliente!", "Eliminar Clientes?", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
         }

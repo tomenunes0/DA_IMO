@@ -54,8 +54,8 @@
       <PropertyRef Name="IdArrendamento" />
     </Key>
     <Property Name="IdArrendamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="InicioContrado" Type="String" Nullable="false" />
-    <Property Name="DuracaoMeses" Type="DateTime" Nullable="false" />
+    <Property Name="InicioContrado" Type="DateTime" Nullable="false" />
+    <Property Name="DuracaoMeses" Type="Int32" Nullable="false" />
     <Property Name="Renovavel" Type="String" Nullable="false" />
     <NavigationProperty Name="Arrendatario" Relationship="masterModel.ClienteArrendamento" FromRole="Arrendamento" ToRole="Cliente" />
     <NavigationProperty Name="CasaArrendavel" Relationship="masterModel.ArrendamentoCasaArrendavel" FromRole="Arrendamento" ToRole="CasaArrendavel" />
@@ -144,7 +144,7 @@
     <End Type="masterModel.Venda" Role="Venda" Multiplicity="*" />
   </Association>
   <Association Name="ArrendamentoCasaArrendavel">
-    <End Type="masterModel.Arrendamento" Role="Arrendamento" Multiplicity="1" />
+    <End Type="masterModel.Arrendamento" Role="Arrendamento" Multiplicity="*" />
     <End Type="masterModel.CasaArrendavel" Role="CasaArrendavel" Multiplicity="0..1" />
   </Association>
 </Schema>

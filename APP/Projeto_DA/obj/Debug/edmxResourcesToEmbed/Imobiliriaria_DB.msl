@@ -130,13 +130,14 @@
         <ScalarProperty Name="IdVenda" ColumnName="IdVenda" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="ArrendamentoCasaArrendavel" TypeName="masterModel.ArrendamentoCasaArrendavel" StoreEntitySet="Casas_CasaArrendavel">
-      <EndProperty Name="Arrendamento">
-        <ScalarProperty Name="IdArrendamento" ColumnName="Arrendamentos_IdArrendamento" />
-      </EndProperty>
+    <AssociationSetMapping Name="ArrendamentoCasaArrendavel" TypeName="masterModel.ArrendamentoCasaArrendavel" StoreEntitySet="Arrendamentos">
       <EndProperty Name="CasaArrendavel">
-        <ScalarProperty Name="IdCasa" ColumnName="IdCasa" />
+        <ScalarProperty Name="IdCasa" ColumnName="CasaArrendavel_IdCasa" />
       </EndProperty>
+      <EndProperty Name="Arrendamento">
+        <ScalarProperty Name="IdArrendamento" ColumnName="IdArrendamento" />
+      </EndProperty>
+      <Condition ColumnName="CasaArrendavel_IdCasa" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

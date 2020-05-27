@@ -78,13 +78,13 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnRemover = new System.Windows.Forms.Button();
             this.casaDataGridView = new System.Windows.Forms.DataGridView();
+            this.btnFilter = new System.Windows.Forms.Button();
+            this.txtLocalidade_Filter = new System.Windows.Forms.TextBox();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.idCasaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.localidadeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ruaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.casaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnFilter = new System.Windows.Forms.Button();
-            this.txtLocalidade_Filter = new System.Windows.Forms.TextBox();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.clienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox2.SuspendLayout();
             this.gbDadosVenda.SuspendLayout();
@@ -636,34 +636,6 @@
             this.casaDataGridView.TabIndex = 17;
             this.casaDataGridView.SelectionChanged += new System.EventHandler(this.casaDataGridView_SelectionChanged);
             // 
-            // idCasaDataGridViewTextBoxColumn
-            // 
-            this.idCasaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.idCasaDataGridViewTextBoxColumn.DataPropertyName = "IdCasa";
-            this.idCasaDataGridViewTextBoxColumn.HeaderText = "IdCasa";
-            this.idCasaDataGridViewTextBoxColumn.Name = "idCasaDataGridViewTextBoxColumn";
-            this.idCasaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // localidadeDataGridViewTextBoxColumn
-            // 
-            this.localidadeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.localidadeDataGridViewTextBoxColumn.DataPropertyName = "Localidade";
-            this.localidadeDataGridViewTextBoxColumn.HeaderText = "Localidade";
-            this.localidadeDataGridViewTextBoxColumn.Name = "localidadeDataGridViewTextBoxColumn";
-            this.localidadeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // ruaDataGridViewTextBoxColumn
-            // 
-            this.ruaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ruaDataGridViewTextBoxColumn.DataPropertyName = "Rua";
-            this.ruaDataGridViewTextBoxColumn.HeaderText = "Rua";
-            this.ruaDataGridViewTextBoxColumn.Name = "ruaDataGridViewTextBoxColumn";
-            this.ruaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // casaBindingSource
-            // 
-            this.casaBindingSource.DataSource = typeof(Projeto_DA.Casa);
-            // 
             // btnFilter
             // 
             this.btnFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
@@ -696,6 +668,34 @@
             this.timer.Enabled = true;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // idCasaDataGridViewTextBoxColumn
+            // 
+            this.idCasaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.idCasaDataGridViewTextBoxColumn.DataPropertyName = "IdCasa";
+            this.idCasaDataGridViewTextBoxColumn.HeaderText = "IdCasa";
+            this.idCasaDataGridViewTextBoxColumn.Name = "idCasaDataGridViewTextBoxColumn";
+            this.idCasaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // localidadeDataGridViewTextBoxColumn
+            // 
+            this.localidadeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.localidadeDataGridViewTextBoxColumn.DataPropertyName = "Localidade";
+            this.localidadeDataGridViewTextBoxColumn.HeaderText = "Localidade";
+            this.localidadeDataGridViewTextBoxColumn.Name = "localidadeDataGridViewTextBoxColumn";
+            this.localidadeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // ruaDataGridViewTextBoxColumn
+            // 
+            this.ruaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ruaDataGridViewTextBoxColumn.DataPropertyName = "Rua";
+            this.ruaDataGridViewTextBoxColumn.HeaderText = "Rua";
+            this.ruaDataGridViewTextBoxColumn.Name = "ruaDataGridViewTextBoxColumn";
+            this.ruaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // casaBindingSource
+            // 
+            this.casaBindingSource.DataSource = typeof(Projeto_DA.Casa);
+            // 
             // clienteBindingSource
             // 
             this.clienteBindingSource.DataSource = typeof(Projeto_DA.Cliente);
@@ -709,6 +709,8 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(1020, 795);
+            this.MinimumSize = new System.Drawing.Size(1020, 795);
             this.Name = "GerirCasas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GerirCasas";

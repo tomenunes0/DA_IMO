@@ -35,20 +35,21 @@
             this.lblIdCasa = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lbListaAlugeres = new System.Windows.Forms.ListBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.gbNovoContrato = new System.Windows.Forms.GroupBox();
             this.cbArrendatario = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.btnNovoServico = new System.Windows.Forms.Button();
+            this.chkRenovavel = new System.Windows.Forms.CheckBox();
+            this.nudDuracaoMeses = new System.Windows.Forms.NumericUpDown();
+            this.dtpInicioDoContrato = new System.Windows.Forms.DateTimePicker();
+            this.btnNovoArrendamento = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnClear = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.gbNovoContrato.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDuracaoMeses)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRemover
@@ -126,6 +127,7 @@
             // lbListaAlugeres
             // 
             this.lbListaAlugeres.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lbListaAlugeres.ColumnWidth = 581;
             this.lbListaAlugeres.ForeColor = System.Drawing.Color.White;
             this.lbListaAlugeres.FormattingEnabled = true;
             this.lbListaAlugeres.ItemHeight = 24;
@@ -133,26 +135,28 @@
             this.lbListaAlugeres.Name = "lbListaAlugeres";
             this.lbListaAlugeres.Size = new System.Drawing.Size(581, 244);
             this.lbListaAlugeres.TabIndex = 20;
+            this.lbListaAlugeres.SelectedIndexChanged += new System.EventHandler(this.lbListaAlugeres_SelectedIndexChanged);
             // 
-            // groupBox3
+            // gbNovoContrato
             // 
-            this.groupBox3.BackColor = System.Drawing.Color.White;
-            this.groupBox3.Controls.Add(this.cbArrendatario);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.checkBox1);
-            this.groupBox3.Controls.Add(this.numericUpDown1);
-            this.groupBox3.Controls.Add(this.dateTimePicker1);
-            this.groupBox3.Controls.Add(this.btnNovoServico);
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Font = new System.Drawing.Font("Modern No. 20", 15.75F, System.Drawing.FontStyle.Bold);
-            this.groupBox3.Location = new System.Drawing.Point(622, 158);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(371, 361);
-            this.groupBox3.TabIndex = 21;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = " Novo Contrato";
+            this.gbNovoContrato.BackColor = System.Drawing.Color.White;
+            this.gbNovoContrato.Controls.Add(this.btnClear);
+            this.gbNovoContrato.Controls.Add(this.cbArrendatario);
+            this.gbNovoContrato.Controls.Add(this.label4);
+            this.gbNovoContrato.Controls.Add(this.chkRenovavel);
+            this.gbNovoContrato.Controls.Add(this.nudDuracaoMeses);
+            this.gbNovoContrato.Controls.Add(this.dtpInicioDoContrato);
+            this.gbNovoContrato.Controls.Add(this.btnNovoArrendamento);
+            this.gbNovoContrato.Controls.Add(this.label1);
+            this.gbNovoContrato.Controls.Add(this.label2);
+            this.gbNovoContrato.Controls.Add(this.label3);
+            this.gbNovoContrato.Font = new System.Drawing.Font("Modern No. 20", 15.75F, System.Drawing.FontStyle.Bold);
+            this.gbNovoContrato.Location = new System.Drawing.Point(622, 158);
+            this.gbNovoContrato.Name = "gbNovoContrato";
+            this.gbNovoContrato.Size = new System.Drawing.Size(371, 361);
+            this.gbNovoContrato.TabIndex = 21;
+            this.gbNovoContrato.TabStop = false;
+            this.gbNovoContrato.Text = " Novo Contrato";
             // 
             // cbArrendatario
             // 
@@ -172,46 +176,47 @@
             this.label4.TabIndex = 32;
             this.label4.Text = "Arrendatário:";
             // 
-            // checkBox1
+            // chkRenovavel
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(10, 192);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(124, 28);
-            this.checkBox1.TabIndex = 31;
-            this.checkBox1.Text = "Renovável";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkRenovavel.AutoSize = true;
+            this.chkRenovavel.Location = new System.Drawing.Point(10, 192);
+            this.chkRenovavel.Name = "chkRenovavel";
+            this.chkRenovavel.Size = new System.Drawing.Size(124, 28);
+            this.chkRenovavel.TabIndex = 31;
+            this.chkRenovavel.Text = "Renovável";
+            this.chkRenovavel.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown1
+            // nudDuracaoMeses
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(10, 156);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(351, 30);
-            this.numericUpDown1.TabIndex = 30;
+            this.nudDuracaoMeses.Location = new System.Drawing.Point(10, 156);
+            this.nudDuracaoMeses.Name = "nudDuracaoMeses";
+            this.nudDuracaoMeses.Size = new System.Drawing.Size(351, 30);
+            this.nudDuracaoMeses.TabIndex = 30;
             // 
-            // dateTimePicker1
+            // dtpInicioDoContrato
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(10, 96);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(351, 30);
-            this.dateTimePicker1.TabIndex = 29;
+            this.dtpInicioDoContrato.Location = new System.Drawing.Point(10, 96);
+            this.dtpInicioDoContrato.Name = "dtpInicioDoContrato";
+            this.dtpInicioDoContrato.Size = new System.Drawing.Size(351, 30);
+            this.dtpInicioDoContrato.TabIndex = 29;
             // 
-            // btnNovoServico
+            // btnNovoArrendamento
             // 
-            this.btnNovoServico.BackColor = System.Drawing.Color.DarkGreen;
-            this.btnNovoServico.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNovoServico.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnNovoServico.FlatAppearance.BorderSize = 5;
-            this.btnNovoServico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.btnNovoServico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNovoServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
-            this.btnNovoServico.ForeColor = System.Drawing.Color.White;
-            this.btnNovoServico.Location = new System.Drawing.Point(122, 288);
-            this.btnNovoServico.Name = "btnNovoServico";
-            this.btnNovoServico.Size = new System.Drawing.Size(154, 46);
-            this.btnNovoServico.TabIndex = 28;
-            this.btnNovoServico.Text = "Novo ➕";
-            this.btnNovoServico.UseVisualStyleBackColor = false;
+            this.btnNovoArrendamento.BackColor = System.Drawing.Color.DarkGreen;
+            this.btnNovoArrendamento.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNovoArrendamento.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnNovoArrendamento.FlatAppearance.BorderSize = 5;
+            this.btnNovoArrendamento.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnNovoArrendamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNovoArrendamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
+            this.btnNovoArrendamento.ForeColor = System.Drawing.Color.White;
+            this.btnNovoArrendamento.Location = new System.Drawing.Point(122, 288);
+            this.btnNovoArrendamento.Name = "btnNovoArrendamento";
+            this.btnNovoArrendamento.Size = new System.Drawing.Size(154, 46);
+            this.btnNovoArrendamento.TabIndex = 28;
+            this.btnNovoArrendamento.Text = "Novo ➕";
+            this.btnNovoArrendamento.UseVisualStyleBackColor = false;
+            this.btnNovoArrendamento.Click += new System.EventHandler(this.btnNovoArrendamento_Click);
             // 
             // label1
             // 
@@ -240,13 +245,31 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "ID: 1";
             // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnClear.FlatAppearance.BorderSize = 2;
+            this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
+            this.btnClear.ForeColor = System.Drawing.Color.White;
+            this.btnClear.Location = new System.Drawing.Point(311, 294);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(50, 35);
+            this.btnClear.TabIndex = 49;
+            this.btnClear.Text = "❌";
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // GerirArrendamentos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1004, 530);
-            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.gbNovoContrato);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "GerirArrendamentos";
@@ -255,9 +278,9 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.gbNovoContrato.ResumeLayout(false);
+            this.gbNovoContrato.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDuracaoMeses)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -271,15 +294,16 @@
         private System.Windows.Forms.Label lblIdCasa;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListBox lbListaAlugeres;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox gbNovoContrato;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnNovoServico;
+        private System.Windows.Forms.Button btnNovoArrendamento;
         private System.Windows.Forms.ComboBox cbArrendatario;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.CheckBox chkRenovavel;
+        private System.Windows.Forms.NumericUpDown nudDuracaoMeses;
+        private System.Windows.Forms.DateTimePicker dtpInicioDoContrato;
+        private System.Windows.Forms.Button btnClear;
     }
 }

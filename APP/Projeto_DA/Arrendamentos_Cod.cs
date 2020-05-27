@@ -10,7 +10,7 @@ namespace Projeto_DA
     {
         public override string ToString()
         {
-            return "Data: " +InicioContrado+ " " + DuracaoMeses + " Renovavel: " + Renovavel + " a ";
+            return "Data: " +InicioContrado+ " " + DuracaoMeses + " Renovavel: " + Renovavel + " a "+ Arrendatario;
         }
     }
 }
