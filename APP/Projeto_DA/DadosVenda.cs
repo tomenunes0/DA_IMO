@@ -64,7 +64,7 @@ namespace Projeto_DA
                     if (clienteSelecionado != null)
                     {
                         Venda vendaTemp = new Venda();
-                        casaVendavelSelecionada.Venda = null;
+                        //casaVendavelSelecionada.Venda = null;
                         vendaTemp.DataVenda = dtpDataVenda.Value;
                         vendaTemp.ValorNegociado = Convert.ToDecimal(txtValorNegociado.Text);
                         vendaTemp.ComissaoNegocio = Convert.ToDecimal(txtValorDaComissao.Text);

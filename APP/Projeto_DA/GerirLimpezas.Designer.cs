@@ -47,6 +47,7 @@
             this.btnEmiteFatura = new System.Windows.Forms.Button();
             this.btnNovaLimpeza = new System.Windows.Forms.Button();
             this.dtpDataDaLimpeza = new System.Windows.Forms.DateTimePicker();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -301,6 +302,10 @@
             this.dtpDataDaLimpeza.Size = new System.Drawing.Size(338, 30);
             this.dtpDataDaLimpeza.TabIndex = 0;
             // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.Filter = "Fatura|*.txt";
+            // 
             // GerirLimpezas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -350,5 +355,6 @@
         private System.Windows.Forms.ListBox lb_ListaDeServicos;
         private System.Windows.Forms.Button btnRemover;
         private System.Windows.Forms.Button btnRemoverServicos;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

@@ -180,7 +180,7 @@ namespace Projeto_DA
         //Quando a lista de limpezas for clicada / quando o index da lista for alterado
         private void lb_ListaDeLimpezas_SelectedIndexChanged(object sender, EventArgs e)
         {
-                       try
+            try
             {
                 //Por o item selecionado para a variavel
                 limpezaSelecionada = (Limpeza)lb_ListaDeLimpezas.SelectedItem;
@@ -301,19 +301,35 @@ namespace Projeto_DA
             {
                 if (limpezaSelecionada != null)
                 {
-                    var csvData = limpezaSelecionada.Servicos.ToList<Servico>();
-                    string csvFilePath = "fatura.txt";
-
-                    using (TextWriter tw = new StreamWriter(csvFilePath))
+                    if (saveFileDialog.ShowDialog() != DialogResult.OK)
                     {
-                        /* foreach (var item in Limpeza.List)
-                         {
-                             tw.WriteLine(string.Format("Item: {0} - Cost: {1}", item.Name, item.Cost.ToString()));
-                         }*/
+                        return;
                     }
+
+                    string ficheiro = saveFileDialog.FileName;
+                    string header = "\t\t\t\tFATURA EMITIDA A \t\t" + DateTime.Now.ToString() + "\n-----------------------------------------------------------------------------\nProprientario: \n\tNome: " + limpezaSelecionada.Casa.Proprientario.Nome + "\n\tNif: " + limpezaSelecionada.Casa.Proprientario.Nif + "\n\tMorada: "
+                         + limpezaSelecionada.Casa.Proprientario.Morada + " \n\tContacto:" +
+                        limpezaSelecionada.Casa.Proprientario.Contacto + "\n" + "-----------------------------------------------------------------------------\nCasa: \n\tRua: " + limpezaSelecionada.Casa.Rua + "\n\tNumero: " +
+                        limpezaSelecionada.Casa.Numero + "\n\tLocalidade: " + limpezaSelecionada.Casa.Localidade + "\n" + "-----------------------------------------------------------------------------\nLimpeza: \n\tData: " + limpezaSelecionada.Data.ToShortDateString() + "\n-----------------------------------------------------------------------------\n";
+
+                    File.WriteAllText(ficheiro, header);
+
+                    string conteudo;
+
+                    string footer = "-----------------------------------------------------------------------------\n" + "Total: \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + limpezaSelecionada.total + "€\n-----------------------------------------------------------------------------";
+
+                    File.AppendAllText(ficheiro, "Servicos: \n");
+
+                    foreach (Servico servico in limpezaSelecionada.Servicos)
+                    {
+                        conteudo = "\tDescricao: " + servico.Descricao + " | Qtd: " + servico.Unidades + " | Preço Unidade: " + servico.Valor + "€ |Subtotal: " + servico.total + "€ \n";
+                        File.AppendAllText(ficheiro, conteudo);
+                    }
+                    File.AppendAllText(ficheiro, footer);
+                    MessageBox.Show("Fatura emitida com sucesso! 😘", "Emitir Fatura", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
-                    MessageBox.Show("Nenhuma limpeza está selecionada", "Emitir Fatura", MessageBoxButtons.OK, MessageBoxIcon.Information) ;
+                    MessageBox.Show("Nenhuma limpeza está selecionada", "Emitir Fatura", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)
