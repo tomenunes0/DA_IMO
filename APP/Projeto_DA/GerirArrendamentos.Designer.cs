@@ -179,6 +179,7 @@
             // 
             // cbArrendatario
             // 
+            this.cbArrendatario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbArrendatario.FormattingEnabled = true;
             this.cbArrendatario.Location = new System.Drawing.Point(10, 250);
             this.cbArrendatario.Name = "cbArrendatario";

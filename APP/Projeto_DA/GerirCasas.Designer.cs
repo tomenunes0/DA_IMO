@@ -270,6 +270,7 @@
             this.txtComissaoBase.Name = "txtComissaoBase";
             this.txtComissaoBase.Size = new System.Drawing.Size(228, 30);
             this.txtComissaoBase.TabIndex = 57;
+            this.txtComissaoBase.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtComissaoBase_KeyPress);
             // 
             // label16
             // 
@@ -286,6 +287,7 @@
             this.txtValorBaseNegociavel.Name = "txtValorBaseNegociavel";
             this.txtValorBaseNegociavel.Size = new System.Drawing.Size(228, 30);
             this.txtValorBaseNegociavel.TabIndex = 55;
+            this.txtValorBaseNegociavel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorBaseNegociavel_KeyPress);
             // 
             // label17
             // 
@@ -365,6 +367,7 @@
             this.txtArrendavelComissao.Name = "txtArrendavelComissao";
             this.txtArrendavelComissao.Size = new System.Drawing.Size(242, 30);
             this.txtArrendavelComissao.TabIndex = 51;
+            this.txtArrendavelComissao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtArrendavelComissao_KeyPress);
             // 
             // label15
             // 
@@ -390,6 +393,7 @@
             this.txtArrendavelValorBase.Name = "txtArrendavelValorBase";
             this.txtArrendavelValorBase.Size = new System.Drawing.Size(242, 30);
             this.txtArrendavelValorBase.TabIndex = 48;
+            this.txtArrendavelValorBase.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtArrendavelValorBase_KeyPress);
             // 
             // label12
             // 
@@ -411,6 +415,7 @@
             // 
             // cb_Clientes
             // 
+            this.cb_Clientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_Clientes.FormattingEnabled = true;
             this.cb_Clientes.Location = new System.Drawing.Point(15, 327);
             this.cb_Clientes.Name = "cb_Clientes";
@@ -429,6 +434,7 @@
             // 
             // cbTipoDeMoradia
             // 
+            this.cbTipoDeMoradia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoDeMoradia.FormattingEnabled = true;
             this.cbTipoDeMoradia.Items.AddRange(new object[] {
             "Moradia Germinada",
@@ -715,6 +721,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GerirCasas";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GerirCasas_FormClosed);
+            this.Load += new System.EventHandler(this.GerirCasas_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.gbDadosVenda.ResumeLayout(false);

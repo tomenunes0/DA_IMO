@@ -29,11 +29,12 @@ namespace Home
         //Novo cliente
         private bool novo = false;
 
-        public GerirCasas()
+        public GerirCasas(masterEntities imobiliaria)
         {
             //Inicia os componentes de gerir as casas 
             InitializeComponent();
             //Atualizar a lista dos clientes sem nenhuma excecao
+            this.imobiliaria = imobiliaria;
             atualizarListaCasas();
             //Meter o cliente selecionado a null
             clienteSelecionado = null;
@@ -52,7 +53,10 @@ namespace Home
         private void btnFilter_Click(object sender, EventArgs e)
         {
             //Chamar a funcao para filtrar as casas pelas localidades 
-            filter_Localidade();
+            if (txtLocalidade_Filter.Text != string.Empty)
+                filter_Localidade();
+            else
+                MessageBox.Show("Nao tem nada para pesquisar!", "Caixa de Texto Vazia", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //Quando o form for fechado
@@ -108,8 +112,7 @@ namespace Home
         //Atualizar a data grid view sem excesoes
         private void atualizarListaCasas()
         {
-            //Marca a imobiliaria como novo container da base de dados 
-            imobiliaria = new masterEntities();
+
             //Seleciona o conteudo da base de dados e organiza - o por nome 
             (from casa in imobiliaria.Casas orderby casa.Localidade select casa).Load();
             //Carrega a informaçao que foi pedida na linha anterior para a listbox que foi gerada
@@ -119,78 +122,91 @@ namespace Home
         //butao novo for precionado
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            if (verificacoes() == true)
+            try
             {
-                //Chamar a Funcao para adicionar a nova casa
-                if (clienteSelecionado != null)
+                if (verificacoes() == true)
                 {
-                    nova_Casa();
+                    //Chamar a Funcao para adicionar a nova casa
+                    if (clienteSelecionado != null)
+                    {
+                        nova_Casa();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Porfavor escolha um proprietario para a casa!", "Nova Casa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
                 }
                 else
                 {
-                    MessageBox.Show("Porfavor escolha um proprietario para a casa!", "Nova Casa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Tem que preencher tudos os campos!", "Nova Casa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Tem que preencher tudos os campos!", "Nova Casa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
 
         }
         //Cirar nova casa
         private void nova_Casa()
         {
-            if (chkVendavel.Checked == true)
+            try
             {
-                CasaVendavel casaVendavelTemp = new CasaVendavel();
-                //Meter os dados da casa para a class para poder assim adicionar
-                casaVendavelTemp.Rua = txtRua.Text;
-                casaVendavelTemp.Localidade = txtLocalidade.Text;
-                casaVendavelTemp.Numero = txtNumero.Text;
-                casaVendavelTemp.Andar = txtAndar.Text;
-                casaVendavelTemp.Area = Convert.ToInt32(nudArea.Value);
-                casaVendavelTemp.NumeroAssoalhada = Convert.ToInt32(nudAssoalhadas.Value);
-                casaVendavelTemp.NumeroWC = Convert.ToInt32(nudWC.Value);
-                casaVendavelTemp.NumerosPisos = Convert.ToInt32(nudPisos.Value);
-                casaVendavelTemp.Tipo = cbTipoDeMoradia.Text;
-                casaVendavelTemp.ValorBaseVenda = Convert.ToDecimal(txtValorBaseNegociavel.Text);
-                casaVendavelTemp.ValorComissao = Convert.ToDecimal(txtComissaoBase.Text);
+                if (chkVendavel.Checked == true)
+                {
+                    CasaVendavel casaVendavelTemp = new CasaVendavel();
+                    //Meter os dados da casa para a class para poder assim adicionar
+                    casaVendavelTemp.Rua = txtRua.Text;
+                    casaVendavelTemp.Localidade = txtLocalidade.Text;
+                    casaVendavelTemp.Numero = txtNumero.Text;
+                    casaVendavelTemp.Andar = txtAndar.Text;
+                    casaVendavelTemp.Area = Convert.ToInt32(nudArea.Value);
+                    casaVendavelTemp.NumeroAssoalhada = Convert.ToInt32(nudAssoalhadas.Value);
+                    casaVendavelTemp.NumeroWC = Convert.ToInt32(nudWC.Value);
+                    casaVendavelTemp.NumerosPisos = Convert.ToInt32(nudPisos.Value);
+                    casaVendavelTemp.Tipo = cbTipoDeMoradia.Text;
+                    casaVendavelTemp.ValorBaseVenda = Convert.ToDecimal(txtValorBaseNegociavel.Text);
+                    casaVendavelTemp.ValorComissao = Convert.ToDecimal(txtComissaoBase.Text);
 
-                //Guarda a casa no cliente selecionado na combo box
-                clienteSelecionado.Casas.Add(casaVendavelTemp);
-                //Guarda a imformaçao para a text box
-                imobiliaria.SaveChanges();
-                //Chamar a funcao atualizar a lista
-                atualizarListaCasas();
-            }
-            else if (chkArrendavel.Checked == true)
-            {
-                CasaArrendavel casaArrendavelTemp = new CasaArrendavel();
-                //Meter os dados da casa para a class para poder assim adicionar
-                casaArrendavelTemp.Rua = txtRua.Text;
-                casaArrendavelTemp.Localidade = txtLocalidade.Text;
-                casaArrendavelTemp.Numero = txtNumero.Text;
-                casaArrendavelTemp.Andar = txtAndar.Text;
-                casaArrendavelTemp.Area = Convert.ToInt32(nudArea.Value);
-                casaArrendavelTemp.NumeroAssoalhada = Convert.ToInt32(nudAssoalhadas.Value);
-                casaArrendavelTemp.NumeroWC = Convert.ToInt32(nudWC.Value);
-                casaArrendavelTemp.NumerosPisos = Convert.ToInt32(nudPisos.Value);
-                casaArrendavelTemp.Tipo = cbTipoDeMoradia.Text;
-                casaArrendavelTemp.ValorBaseMes = Convert.ToDecimal(txtArrendavelValorBase.Text);
-                casaArrendavelTemp.Comissao = Convert.ToDecimal(txtArrendavelComissao.Text);
+                    //Guarda a casa no cliente selecionado na combo box
+                    clienteSelecionado.Casas.Add(casaVendavelTemp);
+                    //Guarda a imformaçao para a text box
+                    imobiliaria.SaveChanges();
+                    //Chamar a funcao atualizar a lista
+                    atualizarListaCasas();
+                }
+                else if (chkArrendavel.Checked == true)
+                {
+                    CasaArrendavel casaArrendavelTemp = new CasaArrendavel();
+                    //Meter os dados da casa para a class para poder assim adicionar
+                    casaArrendavelTemp.Rua = txtRua.Text;
+                    casaArrendavelTemp.Localidade = txtLocalidade.Text;
+                    casaArrendavelTemp.Numero = txtNumero.Text;
+                    casaArrendavelTemp.Andar = txtAndar.Text;
+                    casaArrendavelTemp.Area = Convert.ToInt32(nudArea.Value);
+                    casaArrendavelTemp.NumeroAssoalhada = Convert.ToInt32(nudAssoalhadas.Value);
+                    casaArrendavelTemp.NumeroWC = Convert.ToInt32(nudWC.Value);
+                    casaArrendavelTemp.NumerosPisos = Convert.ToInt32(nudPisos.Value);
+                    casaArrendavelTemp.Tipo = cbTipoDeMoradia.Text;
+                    casaArrendavelTemp.ValorBaseMes = Convert.ToDecimal(txtArrendavelValorBase.Text);
+                    casaArrendavelTemp.Comissao = Convert.ToDecimal(txtArrendavelComissao.Text);
 
-                //Guarda a casa no cliente selecionado na combo box
-                clienteSelecionado.Casas.Add(casaArrendavelTemp);
-                //Guarda a imformaçao para a text box
-                imobiliaria.SaveChanges();
-                //Chamar a funcao atualizar a lista
-                atualizarListaCasas();
+                    //Guarda a casa no cliente selecionado na combo box
+                    clienteSelecionado.Casas.Add(casaArrendavelTemp);
+                    //Guarda a imformaçao para a text box
+                    imobiliaria.SaveChanges();
+                    //Chamar a funcao atualizar a lista
+                    atualizarListaCasas();
+                }
+                else
+                {
+                    MessageBox.Show("Ocorreu um erro ao adicionar a casa por favor verificar os campos.", "Adicionar Casa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu um erro ao adicionar a casa por favor verificar os campos.", "Adicionar Casa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -206,33 +222,41 @@ namespace Home
         //Filtrar a data grid view pela localidade que foi metido na text box
         private void filter_Localidade()
         {
-            //Verifica se a text box tem alguma cena escrita la dentro
-            if (txtLocalidade_Filter.Text.Length > 0)
+            try
             {
-                //desativa o botao de adicionar novo item para a base de dados
-                btnGuardar.Enabled = false;
-                //para dar dispose da imobiliaria
-                imobiliaria.Dispose();
-                //renovar o container
-                imobiliaria = new masterEntities();
-                //selecionar o conteudo da base de dados de acordo com o que foi pedido pela text de filtro
-                (from casa in imobiliaria.Casas
-                 where casa.Localidade.ToUpper().Contains(txtLocalidade_Filter.Text.ToUpper())
-                 orderby casa.Localidade
-                 select casa).ToList();
-                //Carregar a informaçao pedida acima para a list box
-                casaBindingSource.DataSource = imobiliaria.Casas.Local.ToBindingList();
+                //Verifica se a text box tem alguma cena escrita la dentro
+                if (txtLocalidade_Filter.Text.Length > 0)
+                {
+                    //desativa o botao de adicionar novo item para a base de dados
+                    btnGuardar.Enabled = false;
+                    //para dar dispose da imobiliaria
+                    imobiliaria.Dispose();
+                    //renovar o container
+                     imobiliaria = new masterEntities();
+                    //selecionar o conteudo da base de dados de acordo com o que foi pedido pela text de filtro
+                    (from casa in imobiliaria.Casas
+                     where casa.Localidade.ToUpper().Contains(txtLocalidade_Filter.Text.ToUpper())
+                     orderby casa.Localidade
+                     select casa).ToList();
+                    //Carregar a informaçao pedida acima para a list box
+                    casaBindingSource.DataSource = imobiliaria.Casas.Local.ToBindingList();
+                }
+                //se nao tiver texto
+                else
+                {
+                    //o botao de adicionar novo item estara ent ativo
+                    btnGuardar.Enabled = true;
+                    //para dar dispose da imobiliaria
+                    imobiliaria.Dispose();
+                    //Atualizar a lista dos clientes sem nenhuma excecao
+                    atualizarListaCasas();
+                }
             }
-            //se nao tiver texto
-            else
+            catch (Exception ex)
             {
-                //o botao de adicionar novo item estara ent ativo
-                btnGuardar.Enabled = true;
-                //para dar dispose da imobiliaria
-                imobiliaria.Dispose();
-                //Atualizar a lista dos clientes sem nenhuma excecao
-                atualizarListaCasas();
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
         }
 
         //Funcao corre sempre que o texto da textbox muda
@@ -245,93 +269,107 @@ namespace Home
         //quando a selecao da data grid view for mudada
         private void casaDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            DataGridViewRow current = casaDataGridView.CurrentRow;
-            if (current != null) // Means that you've not clicked the column header
+            try
             {
-                //Para ir buscar a casa que foi selecionada na data grid view
-                casaSelecionada = null;
-                casaSelecionada = (Casa)casaDataGridView.CurrentRow.DataBoundItem;
-                //Verificar se existe alguma casa ja selecionada
-                if (casaSelecionada != null)
+                DataGridViewRow current = casaDataGridView.CurrentRow;
+                if (current != null) // Means that you've not clicked the column header
                 {
-                    if (casaSelecionada is CasaVendavel)
+                    //Para ir buscar a casa que foi selecionada na data grid view
+                    casaSelecionada = null;
+                    casaSelecionada = (Casa)casaDataGridView.CurrentRow.DataBoundItem;
+                    //Verificar se existe alguma casa ja selecionada
+                    if (casaSelecionada != null)
                     {
-                        casaVendavelSelecionada = null;
-                        casaVendavelSelecionada = (CasaVendavel)casaDataGridView.CurrentRow.DataBoundItem;
-                        //Verificar se existe alguma casa ja selecionada
-                        if (casaVendavelSelecionada != null)
+                        if (casaSelecionada is CasaVendavel)
                         {
-                            limpar_Campos();
-                            //Carregar as imformaçoes para os respetivos citios
-                            lblIdCasa.Text = "ID: " + casaVendavelSelecionada.IdCasa;
-                            txtRua.Text = casaVendavelSelecionada.Rua;
-                            txtLocalidade.Text = casaVendavelSelecionada.Localidade;
-                            txtNumero.Text = casaVendavelSelecionada.Numero;
-                            txtAndar.Text = casaVendavelSelecionada.Andar;
-                            nudArea.Value = casaVendavelSelecionada.Area;
-                            nudAssoalhadas.Value = casaVendavelSelecionada.NumeroAssoalhada;
-                            nudWC.Value = casaVendavelSelecionada.NumeroWC;
-                            nudPisos.Value = casaVendavelSelecionada.NumerosPisos;
-                            cbTipoDeMoradia.Text = casaVendavelSelecionada.Tipo;
-                            cb_Clientes.Text = casaVendavelSelecionada.Proprientario.ToString();
-                            txtValorBaseNegociavel.Text = string.Empty;
-                            txtComissaoBase.Text = Convert.ToString(casaVendavelSelecionada.ValorComissao);
-                            txtValorBaseNegociavel.Text = Convert.ToString(casaVendavelSelecionada.ValorBaseVenda);
-                            btnGerirLimpezas.Text = "Gerir Limpezas (Total: " + casaSelecionada.Limpezas.Count().ToString() + ")";
-                            chkVendavel.Checked = true;
-                            //Desativar os butoes e chk boxs
-                            chkVendavel.Enabled = false;
-                            chkArrendavel.Enabled = false;
-                            btnNovo.Enabled = false;
-                            btnVerCriarArrendamento.Enabled = false;
-                            //Ativar o butao para guardar
-                            btnGuardar.Enabled = true;
-                            btnVerVenda.Enabled = true;
-                            btnRemover.Enabled = true;
-                            btnGerirLimpezas.Enabled = true;
-                            novo = false;
+                            casaVendavelSelecionada = null;
+                            casaVendavelSelecionada = (CasaVendavel)casaDataGridView.CurrentRow.DataBoundItem;
+                            //Verificar se existe alguma casa ja selecionada
+                            if (casaVendavelSelecionada != null)
+                            {
+                                limpar_Campos();
+                                //Carregar as imformaçoes para os respetivos citios
+                                lblIdCasa.Text = "ID: " + casaVendavelSelecionada.IdCasa;
+                                txtRua.Text = casaVendavelSelecionada.Rua;
+                                txtLocalidade.Text = casaVendavelSelecionada.Localidade;
+                                txtNumero.Text = casaVendavelSelecionada.Numero;
+                                txtAndar.Text = casaVendavelSelecionada.Andar;
+                                nudArea.Value = casaVendavelSelecionada.Area;
+                                nudAssoalhadas.Value = casaVendavelSelecionada.NumeroAssoalhada;
+                                nudWC.Value = casaVendavelSelecionada.NumeroWC;
+                                nudPisos.Value = casaVendavelSelecionada.NumerosPisos;
+                                cbTipoDeMoradia.Text = casaVendavelSelecionada.Tipo;
+                                cb_Clientes.Text = casaVendavelSelecionada.Proprientario.ToString();
+                                txtValorBaseNegociavel.Text = string.Empty;
+                                txtComissaoBase.Text = Convert.ToString(casaVendavelSelecionada.ValorComissao);
+                                txtValorBaseNegociavel.Text = Convert.ToString(casaVendavelSelecionada.ValorBaseVenda);
+                                btnGerirLimpezas.Text = "Gerir Limpezas (Total: " + casaSelecionada.Limpezas.Count().ToString() + ")";
+                                chkVendavel.Checked = true;
+                                //Desativar os butoes e chk boxs
+                                chkVendavel.Enabled = false;
+                                chkArrendavel.Enabled = false;
+                                btnNovo.Enabled = false;
+                                btnVerCriarArrendamento.Enabled = false;
+                                //Ativar o butao para guardar
+                                btnGuardar.Enabled = true;
+                                btnVerVenda.Enabled = true;
+                                btnRemover.Enabled = true;
+                                btnGerirLimpezas.Enabled = true;
+
+                                if (casaVendavelSelecionada.Venda != null)
+                                {
+                                    cb_Clientes.Enabled = false;
+                                    txtValorBaseNegociavel.Enabled = false;
+                                    txtComissaoBase.Enabled = false;
+                                }
+                                    novo = false;
+                            }
                         }
-                    }
 
-                    if (casaSelecionada is CasaArrendavel)
-                    {
-                        casaArrendavelSelecionada = (CasaArrendavel)casaDataGridView.CurrentRow.DataBoundItem;
-                        //Verificar se existe alguma casa ja selecionada
-                        if (casaArrendavelSelecionada != null)
+                        if (casaSelecionada is CasaArrendavel)
                         {
-                            limpar_Campos();
-                            //Carregar as imformaçoes para os respetivos citios
-                            lblIdCasa.Text = "ID: " + casaArrendavelSelecionada.IdCasa;
-                            txtRua.Text = casaArrendavelSelecionada.Rua;
-                            txtLocalidade.Text = casaArrendavelSelecionada.Localidade;
-                            txtNumero.Text = casaArrendavelSelecionada.Numero;
-                            txtAndar.Text = casaArrendavelSelecionada.Andar;
-                            nudArea.Value = casaArrendavelSelecionada.Area;
-                            nudAssoalhadas.Value = casaArrendavelSelecionada.NumeroAssoalhada;
-                            nudWC.Value = casaArrendavelSelecionada.NumeroWC;
-                            nudPisos.Value = casaArrendavelSelecionada.NumerosPisos;
-                            cbTipoDeMoradia.Text = casaArrendavelSelecionada.Tipo;
-                            cb_Clientes.Text = casaArrendavelSelecionada.Proprientario.ToString();
-                            txtValorBaseNegociavel.Text = string.Empty;
-                            txtArrendavelComissao.Text = Convert.ToString(casaArrendavelSelecionada.Comissao);
-                            txtArrendavelValorBase.Text = Convert.ToString(casaArrendavelSelecionada.ValorBaseMes);
-                            btnGerirLimpezas.Text = "Gerir Limpezas (Total: " + casaArrendavelSelecionada.Limpezas.Count().ToString() + ")";
-                            chkArrendavel.Checked = true;
-                            //Desativar os butoes e chk boxs
-                            chkVendavel.Enabled = false;
-                            chkArrendavel.Enabled = false;
-                            btnNovo.Enabled = false;
-                            btnVerVenda.Enabled = false;
-                            //Ativar o butao para guardar
-                            btnGuardar.Enabled = true;
-                            btnGerirLimpezas.Enabled = true;
-                            btnRemover.Enabled = true;
-                            btnVerCriarArrendamento.Enabled = true;
-
-                            novo = false;
+                            casaArrendavelSelecionada = (CasaArrendavel)casaDataGridView.CurrentRow.DataBoundItem;
+                            //Verificar se existe alguma casa ja selecionada
+                            if (casaArrendavelSelecionada != null)
+                            {
+                                limpar_Campos();
+                                //Carregar as imformaçoes para os respetivos citios
+                                lblIdCasa.Text = "ID: " + casaArrendavelSelecionada.IdCasa;
+                                txtRua.Text = casaArrendavelSelecionada.Rua;
+                                txtLocalidade.Text = casaArrendavelSelecionada.Localidade;
+                                txtNumero.Text = casaArrendavelSelecionada.Numero;
+                                txtAndar.Text = casaArrendavelSelecionada.Andar;
+                                nudArea.Value = casaArrendavelSelecionada.Area;
+                                nudAssoalhadas.Value = casaArrendavelSelecionada.NumeroAssoalhada;
+                                nudWC.Value = casaArrendavelSelecionada.NumeroWC;
+                                nudPisos.Value = casaArrendavelSelecionada.NumerosPisos;
+                                cbTipoDeMoradia.Text = casaArrendavelSelecionada.Tipo;
+                                cb_Clientes.Text = casaArrendavelSelecionada.Proprientario.ToString();
+                                txtValorBaseNegociavel.Text = string.Empty;
+                                txtArrendavelComissao.Text = Convert.ToString(casaArrendavelSelecionada.Comissao);
+                                txtArrendavelValorBase.Text = Convert.ToString(casaArrendavelSelecionada.ValorBaseMes);
+                                btnGerirLimpezas.Text = "Gerir Limpezas (Total: " + casaArrendavelSelecionada.Limpezas.Count().ToString() + ")";
+                                chkArrendavel.Checked = true;
+                                //Desativar os butoes e chk boxs
+                                chkVendavel.Enabled = false;
+                                chkArrendavel.Enabled = false;
+                                btnNovo.Enabled = false;
+                                btnVerVenda.Enabled = false;
+                                //Ativar o butao para guardar
+                                btnGuardar.Enabled = true;
+                                btnGerirLimpezas.Enabled = true;
+                                btnRemover.Enabled = true;
+                                btnVerCriarArrendamento.Enabled = true;
+                                cb_Clientes.Enabled = true;
+                                novo = false;
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -371,6 +409,9 @@ namespace Home
             btnGerirLimpezas.Enabled = false;
             btnRemover.Enabled = false;
             novo = true;
+            cb_Clientes.Enabled = true;
+            txtValorBaseNegociavel.Enabled = true;
+            txtComissaoBase.Enabled = true;
         }
 
         //Quando o butao limpar for precionado
@@ -400,103 +441,124 @@ namespace Home
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            //Dialogo de messagem para perguntar se o deseja mesmo fechar o programa ou nao 
-            DialogResult result = MessageBox.Show("Deseja alterar os dados desta casa?", "Alterar Dados?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            //Verifica qual foi a opecao escolhida e se for a opcao nao este ira entrar no if 
-            if (result == DialogResult.Yes)
+            try
             {
-                atualizar_casas();
+                //Dialogo de messagem para perguntar se o deseja mesmo fechar o programa ou nao 
+                DialogResult result = MessageBox.Show("Deseja alterar os dados desta casa?", "Alterar Dados?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                //Verifica qual foi a opecao escolhida e se for a opcao nao este ira entrar no if 
+                if (result == DialogResult.Yes)
+                {
+                    atualizar_casas();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
         }
 
         private void atualizar_casas()
         {
-            if (verificacoes() == true)
+            try
             {
-                if (casaSelecionada is CasaArrendavel)
+                if (verificacoes() == true)
                 {
-                    casaArrendavelSelecionada = (CasaArrendavel)casaDataGridView.CurrentRow.DataBoundItem;
-                    //Verificar se existe alguma casa ja selecionada
-                    if (casaArrendavelSelecionada != null)
+                    if (casaSelecionada is CasaArrendavel)
                     {
-                        casaArrendavelSelecionada.Rua = txtRua.Text;
-                        casaArrendavelSelecionada.Localidade = txtLocalidade.Text;
-                        casaArrendavelSelecionada.Numero = txtNumero.Text;
-                        casaArrendavelSelecionada.Andar = txtAndar.Text;
-                        casaArrendavelSelecionada.Area = Convert.ToInt32(nudArea.Value);
-                        casaArrendavelSelecionada.NumeroAssoalhada = Convert.ToInt32(nudAssoalhadas.Value);
-                        casaArrendavelSelecionada.NumeroWC = Convert.ToInt32(nudWC.Value);
-                        casaArrendavelSelecionada.NumerosPisos = Convert.ToInt32(nudPisos.Value);
-                        casaArrendavelSelecionada.Tipo = cbTipoDeMoradia.Text;
-                        casaArrendavelSelecionada.ValorBaseMes = Convert.ToDecimal(txtArrendavelValorBase.Text);
-                        casaArrendavelSelecionada.Comissao = Convert.ToDecimal(txtArrendavelComissao.Text);
+                        casaArrendavelSelecionada = (CasaArrendavel)casaDataGridView.CurrentRow.DataBoundItem;
+                        //Verificar se existe alguma casa ja selecionada
+                        if (casaArrendavelSelecionada != null)
+                        {
+                            casaArrendavelSelecionada.Rua = txtRua.Text;
+                            casaArrendavelSelecionada.Localidade = txtLocalidade.Text;
+                            casaArrendavelSelecionada.Numero = txtNumero.Text;
+                            casaArrendavelSelecionada.Andar = txtAndar.Text;
+                            casaArrendavelSelecionada.Area = Convert.ToInt32(nudArea.Value);
+                            casaArrendavelSelecionada.NumeroAssoalhada = Convert.ToInt32(nudAssoalhadas.Value);
+                            casaArrendavelSelecionada.NumeroWC = Convert.ToInt32(nudWC.Value);
+                            casaArrendavelSelecionada.NumerosPisos = Convert.ToInt32(nudPisos.Value);
+                            casaArrendavelSelecionada.Tipo = cbTipoDeMoradia.Text;
+                            casaArrendavelSelecionada.ValorBaseMes = Convert.ToDecimal(txtArrendavelValorBase.Text);
+                            casaArrendavelSelecionada.Comissao = Convert.ToDecimal(txtArrendavelComissao.Text);
 
-                        //Guarda a imformaçao para a text box
-                        imobiliaria.SaveChanges();
+                            //Guarda a imformaçao para a text box
+                            imobiliaria.SaveChanges();
+                        }
+                    }
+                    if (casaSelecionada is CasaVendavel)
+                    {
+                        casaVendavelSelecionada = (CasaVendavel)casaDataGridView.CurrentRow.DataBoundItem;
+                        if (casaVendavelSelecionada != null)
+                        {
+                            casaVendavelSelecionada.Rua = txtRua.Text;
+                            casaVendavelSelecionada.Localidade = txtLocalidade.Text;
+                            casaVendavelSelecionada.Numero = txtNumero.Text;
+                            casaVendavelSelecionada.Andar = txtAndar.Text;
+                            casaVendavelSelecionada.Area = Convert.ToInt32(nudArea.Value);
+                            casaVendavelSelecionada.NumeroAssoalhada = Convert.ToInt32(nudAssoalhadas.Value);
+                            casaVendavelSelecionada.NumeroWC = Convert.ToInt32(nudWC.Value);
+                            casaVendavelSelecionada.NumerosPisos = Convert.ToInt32(nudPisos.Value);
+                            casaVendavelSelecionada.Tipo = cbTipoDeMoradia.Text;
+                            casaVendavelSelecionada.ValorBaseVenda = Convert.ToDecimal(txtValorBaseNegociavel.Text);
+                            casaVendavelSelecionada.ValorComissao = Convert.ToDecimal(txtComissaoBase.Text);
+
+                            //Guarda a imformaçao para a text box
+                            imobiliaria.SaveChanges();
+                        }
                     }
                 }
-                if (casaSelecionada is CasaVendavel)
-                {
-                    casaVendavelSelecionada = (CasaVendavel)casaDataGridView.CurrentRow.DataBoundItem;
-                    if (casaVendavelSelecionada != null)
-                    {
-                        casaVendavelSelecionada.Rua = txtRua.Text;
-                        casaVendavelSelecionada.Localidade = txtLocalidade.Text;
-                        casaVendavelSelecionada.Numero = txtNumero.Text;
-                        casaVendavelSelecionada.Andar = txtAndar.Text;
-                        casaVendavelSelecionada.Area = Convert.ToInt32(nudArea.Value);
-                        casaVendavelSelecionada.NumeroAssoalhada = Convert.ToInt32(nudAssoalhadas.Value);
-                        casaVendavelSelecionada.NumeroWC = Convert.ToInt32(nudWC.Value);
-                        casaVendavelSelecionada.NumerosPisos = Convert.ToInt32(nudPisos.Value);
-                        casaVendavelSelecionada.Tipo = cbTipoDeMoradia.Text;
-                        casaVendavelSelecionada.ValorBaseVenda = Convert.ToDecimal(txtValorBaseNegociavel.Text);
-                        casaVendavelSelecionada.ValorComissao = Convert.ToDecimal(txtComissaoBase.Text);
-
-                        //Guarda a imformaçao para a text box
-                        imobiliaria.SaveChanges();
-                    }
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private void btnRemover_Click(object sender, EventArgs e)
         {
-            //Dialogo de messagem para perguntar se o deseja mesmo fechar o programa ou nao 
-            DialogResult result = MessageBox.Show("Deseja eliminar este cliente?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            //Verifica qual foi a opecao escolhida e se for a opcao nao este ira entrar no if 
-            if (result == DialogResult.Yes)
+            try
             {
-                if (casaSelecionada is CasaArrendavel)
+                //Dialogo de messagem para perguntar se o deseja mesmo fechar o programa ou nao 
+                DialogResult result = MessageBox.Show("Deseja eliminar este cliente?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                //Verifica qual foi a opecao escolhida e se for a opcao nao este ira entrar no if 
+                if (result == DialogResult.Yes)
                 {
-                    if (casaArrendavelSelecionada.Arrendamentos.Count() == 0)
+                    if (casaSelecionada is CasaArrendavel)
                     {
-                        //Chamar a funcao para eliminar os clientes
-                        imobiliaria.Casas.Remove(casaArrendavelSelecionada);
-                        imobiliaria.SaveChanges();
-                        //Chamar a funcao para atualizar a lista dos clientes
-                        atualizarListaCasas();
-                    }
-                }
-                else
-                {
-                    if (casaVendavelSelecionada.Venda != null)
-                    {
-                        //Chamar a funcao para eliminar os clientes
-                        imobiliaria.Vendas.Remove(casaVendavelSelecionada.Venda);
-                        imobiliaria.Casas.Remove(casaVendavelSelecionada);
-                        imobiliaria.SaveChanges();
-                        //Chamar a funcao para atualizar a lista dos clientes
-                        atualizarListaCasas();
+                        if (casaArrendavelSelecionada.Arrendamentos.Count() == 0)
+                        {
+                            //Chamar a funcao para eliminar os clientes
+                            imobiliaria.Casas.Remove(casaArrendavelSelecionada);
+                            imobiliaria.SaveChanges();
+                            //Chamar a funcao para atualizar a lista dos clientes
+                            atualizarListaCasas();
+                        }
                     }
                     else
                     {
-                        imobiliaria.Casas.Remove(casaVendavelSelecionada);
-                        imobiliaria.SaveChanges();
-                        //Chamar a funcao para atualizar a lista dos clientes
-                        atualizarListaCasas();
+                        if (casaVendavelSelecionada.Venda != null)
+                        {
+                            //Chamar a funcao para eliminar os clientes
+                            imobiliaria.Vendas.Remove(casaVendavelSelecionada.Venda);
+                            imobiliaria.Casas.Remove(casaVendavelSelecionada);
+                            imobiliaria.SaveChanges();
+                            //Chamar a funcao para atualizar a lista dos clientes
+                            atualizarListaCasas();
+                        }
+                        else
+                        {
+                            imobiliaria.Casas.Remove(casaVendavelSelecionada);
+                            imobiliaria.SaveChanges();
+                            //Chamar a funcao para atualizar a lista dos clientes
+                            atualizarListaCasas();
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -565,6 +627,43 @@ namespace Home
                 state = true;
 
             return state;
+        }
+
+        private void GerirCasas_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtValorBaseNegociavel_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar != 8 && e.KeyChar != 46))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtComissaoBase_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar != 8 && e.KeyChar != 46))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtArrendavelValorBase_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar != 8 && e.KeyChar != 46))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtArrendavelComissao_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar != 8 && e.KeyChar != 46))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

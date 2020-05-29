@@ -34,7 +34,7 @@
             this.lblValorBase = new System.Windows.Forms.Label();
             this.lblProprientario = new System.Windows.Forms.Label();
             this.lblDisponibilidade = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbEfetuarVenda = new System.Windows.Forms.GroupBox();
             this.btnEfetuarVenda = new System.Windows.Forms.Button();
             this.cbComparador = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -47,7 +47,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gbEfetuarVenda.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -101,27 +101,27 @@
             this.lblDisponibilidade.TabIndex = 0;
             this.lblDisponibilidade.Text = "Estado: Disponivel";
             // 
-            // groupBox2
+            // gbEfetuarVenda
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.White;
-            this.groupBox2.Controls.Add(this.btnEfetuarVenda);
-            this.groupBox2.Controls.Add(this.cbComparador);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.txtValorDaComissao);
-            this.groupBox2.Controls.Add(this.txtValorNegociado);
-            this.groupBox2.Controls.Add(this.dtpDataVenda);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Font = new System.Drawing.Font("Modern No. 20", 15.75F, System.Drawing.FontStyle.Bold);
-            this.groupBox2.Location = new System.Drawing.Point(12, 192);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(554, 233);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Efetuar Venda";
+            this.gbEfetuarVenda.BackColor = System.Drawing.Color.White;
+            this.gbEfetuarVenda.Controls.Add(this.btnEfetuarVenda);
+            this.gbEfetuarVenda.Controls.Add(this.cbComparador);
+            this.gbEfetuarVenda.Controls.Add(this.label10);
+            this.gbEfetuarVenda.Controls.Add(this.label9);
+            this.gbEfetuarVenda.Controls.Add(this.txtValorDaComissao);
+            this.gbEfetuarVenda.Controls.Add(this.txtValorNegociado);
+            this.gbEfetuarVenda.Controls.Add(this.dtpDataVenda);
+            this.gbEfetuarVenda.Controls.Add(this.label5);
+            this.gbEfetuarVenda.Controls.Add(this.label6);
+            this.gbEfetuarVenda.Controls.Add(this.label7);
+            this.gbEfetuarVenda.Controls.Add(this.label8);
+            this.gbEfetuarVenda.Font = new System.Drawing.Font("Modern No. 20", 15.75F, System.Drawing.FontStyle.Bold);
+            this.gbEfetuarVenda.Location = new System.Drawing.Point(12, 192);
+            this.gbEfetuarVenda.Name = "gbEfetuarVenda";
+            this.gbEfetuarVenda.Size = new System.Drawing.Size(554, 233);
+            this.gbEfetuarVenda.TabIndex = 4;
+            this.gbEfetuarVenda.TabStop = false;
+            this.gbEfetuarVenda.Text = "Efetuar Venda";
             // 
             // btnEfetuarVenda
             // 
@@ -143,6 +143,7 @@
             // 
             // cbComparador
             // 
+            this.cbComparador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbComparador.FormattingEnabled = true;
             this.cbComparador.Location = new System.Drawing.Point(135, 137);
             this.cbComparador.Name = "cbComparador";
@@ -174,6 +175,7 @@
             this.txtValorDaComissao.Name = "txtValorDaComissao";
             this.txtValorDaComissao.Size = new System.Drawing.Size(307, 30);
             this.txtValorDaComissao.TabIndex = 6;
+            this.txtValorDaComissao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorDaComissao_KeyPress);
             // 
             // txtValorNegociado
             // 
@@ -181,6 +183,7 @@
             this.txtValorNegociado.Name = "txtValorNegociado";
             this.txtValorNegociado.Size = new System.Drawing.Size(336, 30);
             this.txtValorNegociado.TabIndex = 5;
+            this.txtValorNegociado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorNegociado_KeyPress);
             // 
             // dtpDataVenda
             // 
@@ -232,7 +235,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(579, 436);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.gbEfetuarVenda);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DadosVenda";
@@ -240,8 +243,8 @@
             this.Text = "DadosVenda";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gbEfetuarVenda.ResumeLayout(false);
+            this.gbEfetuarVenda.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -253,7 +256,7 @@
         private System.Windows.Forms.Label lblValorBase;
         private System.Windows.Forms.Label lblProprientario;
         private System.Windows.Forms.Label lblDisponibilidade;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbEfetuarVenda;
         private System.Windows.Forms.ComboBox cbComparador;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;

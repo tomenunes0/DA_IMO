@@ -222,6 +222,7 @@
             // 
             // cb_Descricao
             // 
+            this.cb_Descricao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_Descricao.FormattingEnabled = true;
             this.cb_Descricao.Items.AddRange(new object[] {
             "Area até 20m2 1h",
@@ -311,6 +312,8 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(1170, 670);
+            this.MinimumSize = new System.Drawing.Size(1170, 670);
             this.Name = "GerirLimpezas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gerir Limpezas";

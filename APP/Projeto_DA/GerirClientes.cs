@@ -22,32 +22,42 @@ namespace Home
         private bool novo = false;
 
         //Inicio do form 2 
-        public GerirClientes()
+        public GerirClientes(masterEntities imobiliaria)
         {
             //Inicia os componentes do form2 
             InitializeComponent();
             //Atualizar a lista dos clientes sem nenhuma excecao
+
+            //imobiliaria = new masterEntities();
+            this.imobiliaria = imobiliaria;
             atualizarListaClientes();
             //Meter o cliente selecionado a null
+
             clienteSelecionado = null;
             cbfilter_type.SelectedIndex = 0;
             if (imobiliaria.Clientes.Local.Count() == 0)
                 limpar_campos();
-            
+
         }
 
         //Butao de filtro quando sera percionado 
         private void btnFilter_Click(object sender, EventArgs e)
         {
             //Chamar a funcao para filtrar
-            filter_Name(cbfilter_type.SelectedIndex);
+            if (txtNome_Filter.Text != string.Empty)
+                filter_Name(cbfilter_type.SelectedIndex);
+            else
+                MessageBox.Show("Nao tem nada para pesquisar!", "Caixa de Texto Vazia", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //Funcao executa quando o texto da mesma tb muda 
         private void txtNome_Filter_TextChanged(object sender, EventArgs e)
         {
             //Chamar a funcao para filtrar
-            filter_Name(cbfilter_type.SelectedIndex);
+            if (txtNome_Filter.Text != string.Empty)
+                filter_Name(cbfilter_type.SelectedIndex);
+            else
+                MessageBox.Show("Nao tem nada para pesquisar!", "Caixa de Texto Vazia", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //Quando o este form for fechado
@@ -65,61 +75,82 @@ namespace Home
         //Quando o botao de save for precionado esta funcao sera ativada
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            //Verificar se existe algum cliente selecionado para saber se atualiza os dados ou eh um novo registo
-            if (clienteSelecionado != null)
+            try
             {
-                //Chamar a funcao para atualizar os clientes 
-                if (verificar() == true && novo == false)
+                //Verificar se existe algum cliente selecionado para saber se atualiza os dados ou eh um novo registo
+                if (clienteSelecionado != null)
                 {
-                    atualizar_Clientes();
+                    //Chamar a funcao para atualizar os clientes 
+                    if (verificar() == true && novo == false)
+                    {
+                        atualizar_Clientes();
+                    }
                 }
-            }
 
-            //Chamar a funcao para atualizar a lista dos clientes
-            atualizarListaClientes();
+                //Chamar a funcao para atualizar a lista dos clientes
+                atualizarListaClientes();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         //Funcao executa quando a selecao da data grid view muda
         private void clienteDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            DataGridViewRow current = clienteDataGridView.CurrentRow;
-            if (current != null) // Means that you've not clicked the column header
+            try
             {
-                //Para ir buscar o cliente que foi selecionado
-                clienteSelecionado = (Cliente)clienteDataGridView.CurrentRow.DataBoundItem;
-                if (clienteSelecionado != null)
+                DataGridViewRow current = clienteDataGridView.CurrentRow;
+                if (current != null) // Means that you've not clicked the column header
                 {
-                    //Mete os dados no seu citio de acordo com o cliente selecionado
-                    txtNome.Text = clienteSelecionado.Nome;
-                    txtNif.Text = clienteSelecionado.Nif;
-                    txtMorada.Text = clienteSelecionado.Morada;
-                    txtContacto.Text = clienteSelecionado.Contacto;
-                    //Bloquear Butao novo
-                    btnNovo.Enabled = false;
-                    //Desbloquear butao
-                    btnRemover.Enabled = true;
-                    novo = false;
+                    //Para ir buscar o cliente que foi selecionado
+                    clienteSelecionado = (Cliente)clienteDataGridView.CurrentRow.DataBoundItem;
+                    if (clienteSelecionado != null)
+                    {
+                        //Mete os dados no seu citio de acordo com o cliente selecionado
+                        txtNome.Text = clienteSelecionado.Nome;
+                        txtNif.Text = clienteSelecionado.Nif;
+                        txtMorada.Text = clienteSelecionado.Morada;
+                        txtContacto.Text = clienteSelecionado.Contacto;
+                        //Bloquear Butao novo
+                        btnNovo.Enabled = false;
+                        //Desbloquear butao
+                        btnRemover.Enabled = true;
+                        novo = false;
+                    }
+                    //Chamar a funcao para atualizar as lista das casas
+                    atualiza_Casas();
+                    atualizar_Arrendamentos();
+                    atualizar_Aquisicoes();
                 }
-                //Chamar a funcao para atualizar as lista das casas
-                atualiza_Casas();
-                atualizar_Arrendamentos();
-                atualizar_Aquisicoes();
             }
-           
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
         }
 
         //quando o butao novo eh precionadado
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            //Limpar selecionados
-            clienteSelecionado = null;
-            //Chamar a funcao para introdudizir os dados na base de dados;
-            if (verificar() == true)
+            try
             {
-                adicionar_Clientes();
+                //Limpar selecionados
+                clienteSelecionado = null;
+                //Chamar a funcao para introdudizir os dados na base de dados;
+                if (verificar() == true)
+                {
+                    adicionar_Clientes();
+                }
+                novo = false;
             }
-            novo = false;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
         //Limpar os campos todos
@@ -148,133 +179,183 @@ namespace Home
         //Filtrar a data grid view pelo nome que foi metido na text box
         private void filter_Name(int type)
         {
-            //Verifica se a text box tem alguma cena escrita la dentro
-            if (txtNome_Filter.Text.Length > 0)
+            try
             {
-                //desativa o botao de adicionar novo item para a base de dados
-                btnGuardar.Enabled = false;
-                //para dar dispose da imobiliaria
-                imobiliaria.Dispose();
-                //renovar o container
-                imobiliaria = new masterEntities();
-                //selecionar o conteudo da base de dados de acordo com o que foi pedido pela text de filtro
-               // MessageBox.Show(type.ToString());
-                if (type == 0)
+                //Verifica se a text box tem alguma cena escrita la dentro
+                if (txtNome_Filter.Text.Length > 0)
                 {
-                    //Marca a imobiliaria como novo container da base de dados 
+                    //desativa o botao de adicionar novo item para a base de dados
+                    btnGuardar.Enabled = false;
+                    //para dar dispose da imobiliaria 
+                    ///
+                    ///Sem a proxima linha de codigo isto nao funciona
+                    ///
+                    imobiliaria.Dispose();
+                    //renovar o container
                     imobiliaria = new masterEntities();
-                    (from cliente in imobiliaria.Clientes
-                     where cliente.Nome.ToUpper().Contains(txtNome_Filter.Text.ToUpper())
-                     orderby cliente.Nome
-                     select cliente).ToList();
-                    //Carregar a informaçao pedida acima para a list box
-                    clienteBindingSource.DataSource = imobiliaria.Clientes.Local.ToBindingList();
+                    //selecionar o conteudo da base de dados de acordo com o que foi pedido pela text de filtro
+                    // MessageBox.Show(type.ToString());
+                    if (type == 0)
+                    {
+                        (from cliente in imobiliaria.Clientes
+                         where cliente.Nome.ToUpper().Contains(txtNome_Filter.Text.ToUpper())
+                         orderby cliente.Nome
+                         select cliente).ToList();
+                        //Carregar a informaçao pedida acima para a list box
+                        clienteBindingSource.DataSource = imobiliaria.Clientes.Local.ToBindingList();
+                    }
+                    else if (type == 1)
+                    {
+                        //Marca a imobiliaria como novo container da base de dados 
+                        //imobiliaria = new masterEntities();
+                        (from cliente in imobiliaria.Clientes
+                         where cliente.Nif.ToUpper().Contains(txtNome_Filter.Text.ToUpper())
+                         orderby cliente.Nif
+                         select cliente).ToList();
+                        //Carregar a informaçao pedida acima para a list box
+                        clienteBindingSource.DataSource = imobiliaria.Clientes.Local.ToBindingList();
+                    }
+                    else
+                    {
+                        //Marca a imobiliaria como novo container da base de dados 
+                        //imobiliaria = new masterEntities();
+                        (from cliente in imobiliaria.Clientes
+                         where cliente.Contacto.ToUpper().Contains(txtNome_Filter.Text.ToUpper())
+                         orderby cliente.Contacto
+                         select cliente).ToList();
+                        //Carregar a informaçao pedida acima para a list box
+                        clienteBindingSource.DataSource = imobiliaria.Clientes.Local.ToBindingList();
+                    }
                 }
-                else if (type == 1)
-                {
-                    //Marca a imobiliaria como novo container da base de dados 
-                    imobiliaria = new masterEntities();
-                    (from cliente in imobiliaria.Clientes
-                     where cliente.Nif.ToUpper().Contains(txtNome_Filter.Text.ToUpper())
-                     orderby cliente.Nif
-                     select cliente).ToList();
-                    //Carregar a informaçao pedida acima para a list box
-                    clienteBindingSource.DataSource = imobiliaria.Clientes.Local.ToBindingList();
-                }
+                //se nao tiver texto
                 else
                 {
-                    //Marca a imobiliaria como novo container da base de dados 
-                    imobiliaria = new masterEntities();
-                    (from cliente in imobiliaria.Clientes
-                     where cliente.Contacto.ToUpper().Contains(txtNome_Filter.Text.ToUpper())
-                     orderby cliente.Contacto
-                     select cliente).ToList();
-                    //Carregar a informaçao pedida acima para a list box
-                    clienteBindingSource.DataSource = imobiliaria.Clientes.Local.ToBindingList();
-                }              
+                    //o botao de adicionar novo item estara ent ativo
+                    btnGuardar.Enabled = true;
+                    //para dar dispose da imobiliaria
+                    imobiliaria.Dispose();
+                    //Atualizar a lista dos clientes sem nenhuma excecao
+                    atualizarListaClientes();
+                }
             }
-            //se nao tiver texto
-            else
+            catch (Exception ex)
             {
-                //o botao de adicionar novo item estara ent ativo
-                btnGuardar.Enabled = true;
-                //para dar dispose da imobiliaria
-                imobiliaria.Dispose();
-                //Atualizar a lista dos clientes sem nenhuma excecao
-                atualizarListaClientes();
+                //messagem de erro
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
         }
 
         //Funcao para adicionar novo cliente
         private void adicionar_Clientes()
         {
-            //Adicionar novo cliente a class
-            Cliente clienteTemp = new Cliente();
-            clienteTemp.Nome = txtNome.Text;
-            clienteTemp.Nif = txtNif.Text;
-            clienteTemp.Morada = txtMorada.Text;
-            clienteTemp.Contacto = txtContacto.Text;
-            //Adiconar o cliente da class a base de dados
-            imobiliaria.Clientes.Add(clienteTemp);
-            //Processo de guardados na base de dados
-            imobiliaria.SaveChanges();
+            try
+            {
+                //Adicionar novo cliente a class
+                Cliente clienteTemp = new Cliente();
+                clienteTemp.Nome = txtNome.Text;
+                clienteTemp.Nif = txtNif.Text;
+                clienteTemp.Morada = txtMorada.Text;
+                clienteTemp.Contacto = txtContacto.Text;
+                //Adiconar o cliente da class a base de dados
+                imobiliaria.Clientes.Add(clienteTemp);
+                //Processo de guardados na base de dados
+                imobiliaria.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                //messagem de erro
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
         //Atualizar a data grid view sem excesoes
         private void atualizarListaClientes()
         {
-            //Marca a imobiliaria como novo container da base de dados 
-            imobiliaria = new masterEntities();
-            //Seleciona o conteudo da base de dados e organiza - o por nome 
-            (from cliente in imobiliaria.Clientes orderby cliente.Nome select cliente).Load();
-            //Carrega a informaçao que foi pedida na linha anterior para a listbox que foi gerada
-            clienteBindingSource.DataSource = imobiliaria.Clientes.Local.ToBindingList();
+            try
+            {
+                //Seleciona o conteudo da base de dados e organiza - o por nome 
+                (from cliente in imobiliaria.Clientes orderby cliente.Nome select cliente).Load();
+                //Carrega a informaçao que foi pedida na linha anterior para a listbox que foi gerada
+                clienteBindingSource.DataSource = imobiliaria.Clientes.Local.ToBindingList();
+            }
+            catch (Exception ex)
+            {
+                //messagem de erro
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         //Quando o butao de remover for precionado
         private void btnRemover_Click(object sender, EventArgs e)
         {
-            //Dialogo de messagem para perguntar se o deseja mesmo fechar o programa ou nao 
-            DialogResult result = MessageBox.Show("Deseja eliminar este cliente?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            //Verifica qual foi a opecao escolhida e se for a opcao nao este ira entrar no if 
-            if (result == DialogResult.Yes)
+            try
             {
-                //Verificar se o cliente tem ou nao casas associadas
-                if (clienteSelecionado.Casas.Count() == 0 && clienteSelecionado.Aquisicoes.Count() == 0 && clienteSelecionado.Arrendamentos.Count() == 0)
+                //Dialogo de messagem para perguntar se o deseja mesmo fechar o programa ou nao 
+                DialogResult result = MessageBox.Show("Deseja eliminar este cliente?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                //Verifica qual foi a opecao escolhida e se for a opcao nao este ira entrar no if 
+                if (result == DialogResult.Yes)
                 {
-                    //Chamar a funcao para eliminar os clientes
-                    eliminiar_Clientes();
-                    //Chamar a funcao para atualizar a lista dos clientes
-                    atualizarListaClientes();
-                }
-                else
-                    MessageBox.Show("O cliente ainda tem casas ou aquisicoes ou arrendamentos por eliminar!\nTem que eleminar tudo primeiro!\nSó depois é que pode eleminar o cliente!", "Eliminar Clientes?", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //Verificar se o cliente tem ou nao casas associadas
+                    if (clienteSelecionado.Casas.Count() == 0 && clienteSelecionado.Aquisicoes.Count() == 0 && clienteSelecionado.Arrendamentos.Count() == 0)
+                    {
+                        //Chamar a funcao para eliminar os clientes
+                        eliminiar_Clientes();
+                        //Chamar a funcao para atualizar a lista dos clientes
+                        atualizarListaClientes();
+                    }
+                    else
+                        //messagem de erro
+                        MessageBox.Show("O cliente ainda tem casas ou aquisicoes ou arrendamentos por eliminar!\nTem que eleminar tudo primeiro!\nSó depois é que pode eleminar o cliente!", "Eliminar Clientes?", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+                }
             }
+            catch (Exception ex)
+            {
+                //messagem de erro
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
         //Funcao para eliminar os clientes
         private void eliminiar_Clientes()
         {
-            //Remover o cliente selecionado
-            imobiliaria.Clientes.Remove(clienteSelecionado);
-            //Processo de guardados na base de dados 
-            imobiliaria.SaveChanges();
-            limpar_campos();
+            try
+            {
+                //Remover o cliente selecionado
+                imobiliaria.Clientes.Remove(clienteSelecionado);
+                //Processo de guardados na base de dados 
+                imobiliaria.SaveChanges();
+                //Chamnar a funcao para limpar os campos todos
+                limpar_campos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         //Funcao para atualizar os clientes
         private void atualizar_Clientes()
         {
-            //Atualizar os dados dos clientes
-            clienteSelecionado.Nome = txtNome.Text;
-            clienteSelecionado.Nif = txtNif.Text;
-            clienteSelecionado.Morada = txtMorada.Text;
-            clienteSelecionado.Contacto = txtContacto.Text;
+            try
+            {
+                //Atualizar os dados dos clientes
+                clienteSelecionado.Nome = txtNome.Text;
+                clienteSelecionado.Nif = txtNif.Text;
+                clienteSelecionado.Morada = txtMorada.Text;
+                clienteSelecionado.Contacto = txtContacto.Text;
 
-            //Processo de guardados na base de dados 
-            imobiliaria.SaveChanges();
-
+                //Processo de guardados na base de dados 
+                imobiliaria.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                //messagem de erro
+                MessageBox.Show(ex.ToString(), "Ops Samething went wrong!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         //Limpar campos
@@ -347,18 +428,19 @@ namespace Home
         //Atualizar a lista de casas
         private void atualiza_Casas()
         {
+            //verificar se existe
             if (clienteSelecionado != null)
             {
                 lb_Casas.DataSource = null;
                 lb_Casas.DataSource = clienteSelecionado.Casas.ToList<Casa>();
-               /* if (clienteSelecionado.Casas is CasaArrendavel)
-                {
-                    lb_Casas.DataSource = clienteSelecionado.Casas.ToList<CasaArrendavel>();
-                }
-                if (clienteSelecionado.Casas is CasaVendavel)
-                {
-                    lb_Casas.DataSource = clienteSelecionado.Casas.ToList<CasaVendavel>();
-                }*/
+                /* if (clienteSelecionado.Casas is CasaArrendavel)
+                 {
+                     lb_Casas.DataSource = clienteSelecionado.Casas.ToList<CasaArrendavel>();
+                 }
+                 if (clienteSelecionado.Casas is CasaVendavel)
+                 {
+                     lb_Casas.DataSource = clienteSelecionado.Casas.ToList<CasaVendavel>();
+                 }*/
             }
         }
 
@@ -372,6 +454,7 @@ namespace Home
             }
         }
 
+        //funcao para atualizar os arrendamentos
         private void atualizar_Arrendamentos()
         {
             if (clienteSelecionado != null)
@@ -381,6 +464,7 @@ namespace Home
             }
         }
 
+        //Funcao para atualizar as aquisiçoes
         private void atualizar_Aquisicoes()
         {
             if (clienteSelecionado != null)

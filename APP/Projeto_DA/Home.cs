@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projeto_DA;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,12 @@ namespace Home
 {
     public partial class Home : Form
     {
+        private masterEntities imobiliaria;
         public Home()
-        {
+        {      
             InitializeComponent();
+            //Marca a imobiliaria como novo container da base de dados 
+            imobiliaria = new masterEntities();
         }
 
         //Quando o butao de gerir cliente eh percionado
@@ -22,7 +26,7 @@ namespace Home
         {
             this.Hide();
             //Perpara o Form 3 para ser executado
-            GerirClientes frm = new GerirClientes();
+            GerirClientes frm = new GerirClientes(imobiliaria);
             //Mostra o GerirCasas 
             frm.ShowDialog();
             //Esconde o form 1 para este nao ser mostrado
@@ -34,7 +38,7 @@ namespace Home
         {
             this.Hide();
             //Perpara o Form 2 para ser executado
-            GerirCasas frm = new GerirCasas();
+            GerirCasas frm = new GerirCasas(imobiliaria);
             //Mostra o GerirClientes 
             frm.ShowDialog();
             //Esconde o GerirClientes para este nao ser mostrado
@@ -72,6 +76,11 @@ namespace Home
                 //Forcar o programa a fechar
                 Environment.Exit(0);
             }
+        }
+
+        private void Home_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
