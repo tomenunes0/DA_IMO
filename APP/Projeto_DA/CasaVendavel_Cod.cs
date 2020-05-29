@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Projeto_DA
 {
-   partial class Casa
+    partial class CasaVendavel
     {
         public override string ToString()
         {
-            return Tipo + ": "+IdCasa+" " + Rua + Localidade;
+            return "Vendavel" + ": " + IdCasa + " " + Rua + " " + Localidade;
         }
     }
 }

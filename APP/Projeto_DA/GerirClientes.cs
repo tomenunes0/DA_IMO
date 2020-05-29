@@ -30,20 +30,24 @@ namespace Home
             atualizarListaClientes();
             //Meter o cliente selecionado a null
             clienteSelecionado = null;
+            cbfilter_type.SelectedIndex = 0;
+            if (imobiliaria.Clientes.Local.Count() == 0)
+                limpar_campos();
+            
         }
 
         //Butao de filtro quando sera percionado 
         private void btnFilter_Click(object sender, EventArgs e)
         {
             //Chamar a funcao para filtrar
-            filter_Name();
+            filter_Name(cbfilter_type.SelectedIndex);
         }
 
         //Funcao executa quando o texto da mesma tb muda 
         private void txtNome_Filter_TextChanged(object sender, EventArgs e)
         {
             //Chamar a funcao para filtrar
-            filter_Name();
+            filter_Name(cbfilter_type.SelectedIndex);
         }
 
         //Quando o este form for fechado
@@ -126,6 +130,8 @@ namespace Home
             //Descelecionar listas de gird view 
             clienteDataGridView.ClearSelection();
             lb_Casas.DataSource = null;
+            lb_Aquisicoes.DataSource = null;
+            lb_Arrendamentos.DataSource = null;
             //Limpar caixas de texto
             txtNome.Text = string.Empty;
             txtNif.Text = string.Empty;
@@ -140,7 +146,7 @@ namespace Home
         }
 
         //Filtrar a data grid view pelo nome que foi metido na text box
-        private void filter_Name()
+        private void filter_Name(int type)
         {
             //Verifica se a text box tem alguma cena escrita la dentro
             if (txtNome_Filter.Text.Length > 0)
@@ -152,12 +158,40 @@ namespace Home
                 //renovar o container
                 imobiliaria = new masterEntities();
                 //selecionar o conteudo da base de dados de acordo com o que foi pedido pela text de filtro
-                (from cliente in imobiliaria.Clientes
-                 where cliente.Nome.ToUpper().Contains(txtNome_Filter.Text.ToUpper())
-                 orderby cliente.Nome
-                 select cliente).ToList();
-                //Carregar a informaçao pedida acima para a list box
-                clienteBindingSource.DataSource = imobiliaria.Clientes.Local.ToBindingList();
+               // MessageBox.Show(type.ToString());
+                if (type == 0)
+                {
+                    //Marca a imobiliaria como novo container da base de dados 
+                    imobiliaria = new masterEntities();
+                    (from cliente in imobiliaria.Clientes
+                     where cliente.Nome.ToUpper().Contains(txtNome_Filter.Text.ToUpper())
+                     orderby cliente.Nome
+                     select cliente).ToList();
+                    //Carregar a informaçao pedida acima para a list box
+                    clienteBindingSource.DataSource = imobiliaria.Clientes.Local.ToBindingList();
+                }
+                else if (type == 1)
+                {
+                    //Marca a imobiliaria como novo container da base de dados 
+                    imobiliaria = new masterEntities();
+                    (from cliente in imobiliaria.Clientes
+                     where cliente.Nif.ToUpper().Contains(txtNome_Filter.Text.ToUpper())
+                     orderby cliente.Nif
+                     select cliente).ToList();
+                    //Carregar a informaçao pedida acima para a list box
+                    clienteBindingSource.DataSource = imobiliaria.Clientes.Local.ToBindingList();
+                }
+                else
+                {
+                    //Marca a imobiliaria como novo container da base de dados 
+                    imobiliaria = new masterEntities();
+                    (from cliente in imobiliaria.Clientes
+                     where cliente.Contacto.ToUpper().Contains(txtNome_Filter.Text.ToUpper())
+                     orderby cliente.Contacto
+                     select cliente).ToList();
+                    //Carregar a informaçao pedida acima para a list box
+                    clienteBindingSource.DataSource = imobiliaria.Clientes.Local.ToBindingList();
+                }              
             }
             //se nao tiver texto
             else
@@ -226,6 +260,7 @@ namespace Home
             imobiliaria.Clientes.Remove(clienteSelecionado);
             //Processo de guardados na base de dados 
             imobiliaria.SaveChanges();
+            limpar_campos();
         }
 
         //Funcao para atualizar os clientes
@@ -279,6 +314,10 @@ namespace Home
         //Fazer o butao guardar mais gostoso
         private void timer_Tick(object sender, EventArgs e)
         {
+            if (true)
+            {
+                String.IsNullOrEmpty(txtContacto.Text);
+            }
             //Verifica se os campos estao preechidos
             if (txtNome.Text == string.Empty)
                 btnGuardar.Enabled = false;
@@ -312,6 +351,14 @@ namespace Home
             {
                 lb_Casas.DataSource = null;
                 lb_Casas.DataSource = clienteSelecionado.Casas.ToList<Casa>();
+               /* if (clienteSelecionado.Casas is CasaArrendavel)
+                {
+                    lb_Casas.DataSource = clienteSelecionado.Casas.ToList<CasaArrendavel>();
+                }
+                if (clienteSelecionado.Casas is CasaVendavel)
+                {
+                    lb_Casas.DataSource = clienteSelecionado.Casas.ToList<CasaVendavel>();
+                }*/
             }
         }
 

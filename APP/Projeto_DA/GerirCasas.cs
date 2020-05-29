@@ -39,9 +39,14 @@ namespace Home
             clienteSelecionado = null;
             //Adicionar os clientes da base de dados na combo box
             cb_Clientes.DataSource = imobiliaria.Clientes.ToList<Cliente>();
+            cb_Clientes.SelectedIndex = -1;
             //verificar se existe alguma casa na base de dados
             if (imobiliaria.Casas.Local.Count() == 0)
+            {
+                clienteSelecionado = (Cliente)cb_Clientes.SelectedItem;
                 limpar_Campos();
+            }
+
         }
 
         private void btnFilter_Click(object sender, EventArgs e)
@@ -114,8 +119,24 @@ namespace Home
         //butao novo for precionado
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            //Chamar a Funcao para adicionar a nova casa
-            nova_Casa();
+            if (verificacoes() == true)
+            {
+                //Chamar a Funcao para adicionar a nova casa
+                if (clienteSelecionado != null)
+                {
+                    nova_Casa();
+                }
+                else
+                {
+                    MessageBox.Show("Porfavor escolha um proprietario para a casa!", "Nova Casa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Tem que preencher tudos os campos!", "Nova Casa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
 
         }
         //Cirar nova casa
@@ -224,7 +245,7 @@ namespace Home
         //quando a selecao da data grid view for mudada
         private void casaDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            var current = casaDataGridView.CurrentRow;
+            DataGridViewRow current = casaDataGridView.CurrentRow;
             if (current != null) // Means that you've not clicked the column header
             {
                 //Para ir buscar a casa que foi selecionada na data grid view
@@ -266,6 +287,7 @@ namespace Home
                             //Ativar o butao para guardar
                             btnGuardar.Enabled = true;
                             btnVerVenda.Enabled = true;
+                            btnRemover.Enabled = true;
                             btnGerirLimpezas.Enabled = true;
                             novo = false;
                         }
@@ -303,7 +325,9 @@ namespace Home
                             //Ativar o butao para guardar
                             btnGuardar.Enabled = true;
                             btnGerirLimpezas.Enabled = true;
+                            btnRemover.Enabled = true;
                             btnVerCriarArrendamento.Enabled = true;
+
                             novo = false;
                         }
                     }
@@ -345,6 +369,7 @@ namespace Home
             btnVerCriarArrendamento.Enabled = false;
             btnVerVenda.Enabled = false;
             btnGerirLimpezas.Enabled = false;
+            btnRemover.Enabled = false;
             novo = true;
         }
 
@@ -536,8 +561,6 @@ namespace Home
                 else
                     gbDadosArrendamento.Enabled = true;
             }
-            else if (novo == true)
-                state = false;
             else
                 state = true;
 

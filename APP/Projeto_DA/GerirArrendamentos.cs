@@ -45,14 +45,14 @@ namespace Projeto_DA
             {
                 //arrendamentoSelecionado.Arrendatario = null;
                 //arrendamentoSelecionado.CasaArrendavel = null;
-                imobiliaria.SaveChanges();
-
                 //clienteSelecionado.Arrendamentos.Remove(arrendamentoSelecionado);
                 //casaArrendavelSelecionada.Arrendamentos.Remove(arrendamentoSelecionado);
                 imobiliaria.Arrendamentos.Remove(arrendamentoSelecionado);
-
+                //Guardar alteracoes
                 imobiliaria.SaveChanges();
+                //Chamar a funcapara  atualizar a lista
                 atualizar_Lista();
+                //Chamar a funcao para limpar os campos
                 limpar_campos();
             }
         }

@@ -49,15 +49,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbfilter_type = new System.Windows.Forms.ComboBox();
             this.btnRemover = new System.Windows.Forms.Button();
             this.clienteDataGridView = new System.Windows.Forms.DataGridView();
             this.btnFilter = new System.Windows.Forms.Button();
             this.txtNome_Filter = new System.Windows.Forms.TextBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.clienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nifDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contactoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.clienteBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -65,6 +67,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clienteDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clienteBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clienteBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -277,6 +280,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Controls.Add(this.cbfilter_type);
             this.groupBox1.Controls.Add(this.btnRemover);
             this.groupBox1.Controls.Add(this.clienteDataGridView);
             this.groupBox1.Controls.Add(this.btnFilter);
@@ -289,6 +293,18 @@
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Clientes:";
+            // 
+            // cbfilter_type
+            // 
+            this.cbfilter_type.FormattingEnabled = true;
+            this.cbfilter_type.Items.AddRange(new object[] {
+            "Nome",
+            "NIf",
+            "Contacto"});
+            this.cbfilter_type.Location = new System.Drawing.Point(14, 70);
+            this.cbfilter_type.Name = "cbfilter_type";
+            this.cbfilter_type.Size = new System.Drawing.Size(299, 32);
+            this.cbfilter_type.TabIndex = 17;
             // 
             // btnRemover
             // 
@@ -319,11 +335,11 @@
             this.nifDataGridViewTextBoxColumn,
             this.contactoDataGridViewTextBoxColumn});
             this.clienteDataGridView.DataSource = this.clienteBindingSource;
-            this.clienteDataGridView.Location = new System.Drawing.Point(14, 72);
+            this.clienteDataGridView.Location = new System.Drawing.Point(14, 108);
             this.clienteDataGridView.Name = "clienteDataGridView";
             this.clienteDataGridView.ReadOnly = true;
             this.clienteDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.clienteDataGridView.Size = new System.Drawing.Size(343, 727);
+            this.clienteDataGridView.Size = new System.Drawing.Size(355, 701);
             this.clienteDataGridView.TabIndex = 1;
             this.clienteDataGridView.SelectionChanged += new System.EventHandler(this.clienteDataGridView_SelectionChanged);
             // 
@@ -337,7 +353,7 @@
             this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
             this.btnFilter.ForeColor = System.Drawing.Color.White;
-            this.btnFilter.Location = new System.Drawing.Point(307, 31);
+            this.btnFilter.Location = new System.Drawing.Point(319, 70);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(50, 35);
             this.btnFilter.TabIndex = 15;
@@ -350,7 +366,7 @@
             this.txtNome_Filter.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNome_Filter.Location = new System.Drawing.Point(14, 33);
             this.txtNome_Filter.Name = "txtNome_Filter";
-            this.txtNome_Filter.Size = new System.Drawing.Size(287, 31);
+            this.txtNome_Filter.Size = new System.Drawing.Size(355, 31);
             this.txtNome_Filter.TabIndex = 14;
             this.txtNome_Filter.TextChanged += new System.EventHandler(this.txtNome_Filter_TextChanged);
             // 
@@ -358,10 +374,6 @@
             // 
             this.timer.Enabled = true;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // clienteBindingSource
-            // 
-            this.clienteBindingSource.DataSource = typeof(Projeto_DA.Cliente);
             // 
             // nomeDataGridViewTextBoxColumn
             // 
@@ -390,6 +402,14 @@
             this.contactoDataGridViewTextBoxColumn.ReadOnly = true;
             this.contactoDataGridViewTextBoxColumn.Width = 113;
             // 
+            // clienteBindingSource
+            // 
+            this.clienteBindingSource.DataSource = typeof(Projeto_DA.Cliente);
+            // 
+            // clienteBindingSource1
+            // 
+            this.clienteBindingSource1.DataSource = typeof(Projeto_DA.Cliente);
+            // 
             // GerirClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,6 +434,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clienteDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clienteBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clienteBindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -448,5 +469,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nifDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn contactoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ComboBox cbfilter_type;
+        private System.Windows.Forms.BindingSource clienteBindingSource1;
     }
 }
